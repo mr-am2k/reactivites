@@ -14,7 +14,7 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-//Next 10 lines of code are used to create or update database based on migration
+//Next 10 lines of code are used to create or update database based on migration, this can be done in terminal (dotnet ef database update command)
 using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
 try
