@@ -1,36 +1,12 @@
-using MediatR;
-using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
-using Application.Activities;
-using Application.Core;
+using API.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
-builder.Services.AddDbContext<DataContext>(opt =>
-{
-    opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
-//allows us to send requests to the backend
-builder.Services.AddCors(opt =>
-{
-    opt.AddPolicy("CorsPolicy", policy =>
-    {
-        policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
-        //AnyMethod means that allows all methods (GET,POST,PUT,...), AnyHeader means that allow all headers and AnyOrigin means that allows all origins, (domain is't important)
-    });
-});
-
-builder.Services.AddMediatR(typeof(List.Handler).Assembly);
-builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
-
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
+builder.Services.AddApplicationServices(builder.Configuration);
 var app = builder.Build();
 
 //Next scope is used to create or update database based on migration, this can be done in terminal (dotnet ef database update command)
