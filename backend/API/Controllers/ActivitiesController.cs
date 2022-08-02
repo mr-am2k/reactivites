@@ -24,7 +24,7 @@ public class ActivitiesController : BaseApiController
 
     [HttpPost]
     public async Task<IActionResult> CreateActivity(Activity activity) //with IActionResult we get access to the response stuff, but we don't need to pass a parameter as with ActionResult
-    {  
+    {
         return Ok(await Mediator.Send(new Create.Command { Activity = activity }));
     }
 
@@ -32,7 +32,13 @@ public class ActivitiesController : BaseApiController
     public async Task<IActionResult> UpdateActivity(Guid id, Activity activity)
     {
         activity.Id = id;
-        return Ok(await Mediator.Send(new Update.Command {Activity = activity}));
+        return Ok(await Mediator.Send(new Update.Command { Activity = activity }));
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteActivity(Guid id)
+    {
+        return Ok(await Mediator.Send(new Delete.Command { Id = id }));
     }
 
 }
