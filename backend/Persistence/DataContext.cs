@@ -12,4 +12,5 @@ namespace Persistence
         public DbSet<Activity> Activities {get;set;}
     }
 }
+//purpose of the DataContext is to connect to the database and allow us to do things needed with it
 
