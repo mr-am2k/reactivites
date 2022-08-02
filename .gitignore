@@ -5,6 +5,9 @@
 
 appsettings.json
 
+.env
+.env.local
+
 # User-specific files
 *.rsuser
 *.suo
