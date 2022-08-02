@@ -1,5 +1,8 @@
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
+using Application.Activities;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -18,6 +21,8 @@ builder.Services.AddCors(opt =>
         //AnyMethod means that allows all methods (GET,POST,PUT,...), AnyHeader means that allow all headers and AnyOrigin means that allows all origins, (domain is't important)
     });
 });
+
+builder.Services.AddMediatR(typeof(List.Handler).Assembly);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

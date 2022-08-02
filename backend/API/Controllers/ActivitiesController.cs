@@ -2,6 +2,8 @@ using Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
+using MediatR;
+using Application.Activities;
 
 namespace API.Controllers;
 
@@ -10,19 +12,20 @@ namespace API.Controllers;
 
 public class ActivitiesController : ControllerBase
 {
-    private readonly DataContext _context;
-    public ActivitiesController(DataContext context){
-            _context = context;
+    private readonly IMediator _mediator;
+    
+    public ActivitiesController(IMediator mediator){
+            _mediator = mediator;
+           
     }
 
     [HttpGet]
     public async Task<ActionResult<List<Activity>>> GetActivities(){
-        return await _context.Activities.ToListAsync();
+        return await _mediator.Send(new List.Query());
     }
 
     [HttpGet ("{id}")]
     public async Task<ActionResult<Activity>> GetActivity(Guid id){
-        return await _context.Activities.FindAsync(id);
+        return Ok();
     }
- 
 }
