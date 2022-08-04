@@ -1,60 +1,39 @@
 import { useState } from 'react';
-import { AppBar, Container, Toolbar, MenuItem, Typography, Button, Menu } from "@mui/material"
 import GroupsIcon from '@mui/icons-material/Groups';
 import classes from './Navbar.module.css'
 
-const MenuItems = (props) => (
-    <Container className={props.navbarLinks}>
-        <MenuItem className={props.navbarLink} >
-            <Typography variant='h6'>Reactivites</Typography>
-        </MenuItem>
-        <MenuItem className={props.navbarLink}>
-            <Typography variant='h6'>Activities</Typography>
-        </MenuItem>
-        <MenuItem className={props.navbarButton} >
-            <Button className={props.navbarButtonText}>Create Activity</Button>
-        </MenuItem>
-    </Container>
-)
 
 const Navbar = () => {
-    const [anchorEl, setAnchorEl] = useState(null);
-    const open = Boolean(anchorEl);
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-
+    const [mobileLinks, setMobileLinks] = useState(false)
+    const menuHandler = () => {
+        setMobileLinks((prevState) => { return !prevState })
+    }
+    const closeMenu = () => {
+        setMobileLinks(false)
+    }
     return (
-        <AppBar position='static'>
-            <Container className={classes.navbarContainer}>
-                <Toolbar disableGutters className={classes.navbarToolbar}>
-                    <GroupsIcon />
-                    <div className={classes.menuDesktop}>
-                        <MenuItems navbarLinks={classes.navbarLinks} navbarLink={classes.navbarLink} navbarButton={classes.navbarButton} navbarButtonText={classes.navbarButtonText} />
-                    </div>
-                    <div className={classes.menuMobile}>
-                        <Button
-                            className={classes.menuButton}
-                            aria-controls={open ? 'basic-menu' : undefined}
-                            aria-expanded={open ? 'true' : undefined}
-                            onClick={handleClick}
-                        >
-                            Menu
-                        </Button>
-                        <Menu
-                            anchorEl={anchorEl}
-                            open={open}
-                            onClose={handleClose}
-                        >
-                            <MenuItems navbarLinks={classes.navbarMobileLinks} navbarLink={classes.navbarMobileLink} navbarButton={classes.navbarMobileButton} navbarButtonText={classes.navbarMobileButtonText} />
-                        </Menu>
-                    </div>
-                </Toolbar>
-            </Container>
-        </AppBar>
+        <div className={classes.navbarContainer}>
+            <div className={classes.navbarContent}>
+                <GroupsIcon sx={{ fontSize: "2.2rem" }} />
+                <div className={classes.navbarDesktopLinks}>
+                    <a href='#home'> Reactivities </a>
+                    <a href='#activities'> Activities </a>
+                    <button>Create Activity</button>
+                </div>
+                <div className={classes.navbarMobileContainer}>
+                    <button className={classes.menuButton} onClick={menuHandler}>Menu</button>
+                    {
+                        mobileLinks && (
+                            <div className={classes.navbarMobileLinks}>
+                                <a href='#home' onClick={closeMenu}> Reactivities </a>
+                                <a href='#activities' onClick={closeMenu} > Activities </a>
+                                <button className={classes.activityMobileButton} onClick={closeMenu}>Create Activity</button>
+                            </div>
+                        )
+                    }
+                </div>
+            </div>
+        </div>
     )
 }
 
