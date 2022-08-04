@@ -1,0 +1,78 @@
+.activityContainer{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    font-family: var(--font-family);
+    margin-bottom: 1rem;
+    line-height: 0.5rem;
+}
+.activityContainer hr{
+   width: 100%;
+}
+.activityContent{
+    width: 70%;
+}
+.descriptionContent{
+    display: inline;
+}
+.activityCategory{
+    outline: 1rem;
+    width: 5rem;
+    height: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid gray;
+    border-radius: 0.5rem;
+}
+.activityButton {
+    width:30%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+.activityButton button{
+    width: 7rem;
+    height: 3rem;
+    margin-right: 1rem;
+    border-radius: 0.3rem;
+    border: none;
+    background-color:#1e90ff;
+    font-size: 1.2rem;
+    font-family: var(--font-family);
+    color:var(--color-white);
+}
+.activityButton button:hover{
+    outline: 2px solid gray;
+    cursor: pointer;
+    font-size: 1.3rem;
+}
+@media screen and (max-width:1050px) {
+    .activityContainer{
+      flex-direction: column;
+    }
+}
+@media screen and (max-width:850px) {
+    .activityContent{
+        width: 100%;
+    }
+    .activityContent h3{
+      font-size: 1rem;
+    }
+    .activityContent p {
+        font-size: 0.7rem;
+    }
+    .activityButton{
+        margin-top: 1rem;
+        justify-content: flex-start;
+    }
+    .activityButton button{
+        width: 5rem;
+        height: 2rem;
+    }
+}
+@media screen and (max-width:550px) {
+    .descriptionContent{
+        line-height: 1rem;
+    }
+}

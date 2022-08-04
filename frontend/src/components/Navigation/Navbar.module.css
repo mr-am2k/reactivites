@@ -1,20 +1,15 @@
 .navbarContainer {
   margin: 0;
-  background: linear-gradient(
-    90deg,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(12, 138, 238, 1) 15%,
-    rgba(7, 181, 217, 1) 100%
-  );
+  background: var(--background-gradient);
   min-width: 100%;
   height: 4rem;
 }
 .navbarContent {
   height: inherit;
-  padding: 0.5rem 2rem;
+  padding: 0.3rem 2rem;
   display: flex;
   align-items: center;
-  color: white;
+  color:var(--color-white);
   font-family: var(--font-family);
 }
 .navbarDesktopLinks {
@@ -22,7 +17,7 @@
   margin-left: 2rem;
 }
 .navbarDesktopLinks a {
-  color: white;
+  color:var(--color-white);
   text-decoration: none;
   font-size: 1.3rem;
   margin-right: 1rem;
@@ -30,16 +25,16 @@
 .navbarDesktopLinks button {
   border: none;
   outline: none;
-  background-color: green;
+  background-color: var(--button-green);
   width: 10rem;
   height: 2.2rem;
   border-radius: 2.2rem;
-  color: white;
+  color:var(--color-white);
   font-family: var(--font-family);
   font-size: 1rem;
 }
 .navbarDesktopLinks button:hover {
-  background-color: purple;
+  background: var(--button-hover-purple-gradient);
   cursor: pointer;
 }
 
@@ -53,11 +48,11 @@
 .menuButton {
   border: none;
   outline: none;
-  background-color: green;
+  background-color: var(--button-green);
   width: 6rem;
   height: 2.2rem;
   border-radius: 2.2rem;
-  color: white;
+  color:var(--color-white);
   font-family: var(--font-family);
   font-size: 1rem;
 }
@@ -73,7 +68,7 @@
   height: 10rem;
 }
 .navbarMobileLinks a {
-  color: white;
+  color:var(--color-white);
   text-decoration: none;
   font-size: 1rem;
   margin-right: 1rem;
@@ -81,11 +76,11 @@
 .activityMobileButton {
   border: none;
   outline: none;
-  background-color: green;
+  background-color: var(--button-green);
   width: 8rem;
   height: 2.2rem;
   border-radius: 2.2rem;
-  color: white;
+  color:var(--color-white);
   font-family: var(--font-family);
   font-size: 0.85rem;
 }

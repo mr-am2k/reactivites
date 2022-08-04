@@ -1,12 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
 
-:root{
+:root {
+  --background-gradient: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(12, 138, 238, 1) 15%,
+    rgba(7, 181, 217, 1) 100%
+  );
   --font-family: 'Montserrat Alternates', sans-serif;
+  --button-green: #5BB318;
+  --button-hover-purple-gradient: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(224,12,238,1) 46%);
+  --button-blue: #1e90ff;
+  --color-white: #ffffff;
 }
-
 body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
