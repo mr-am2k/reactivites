@@ -1,0 +1,71 @@
+.activityForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60%;
+  margin-top: 3rem;
+  background-color: var(--color-white);
+  border: 1px solid gray;
+  border-radius: 5px;
+  box-shadow: 2px 2px 25px #888888;
+}
+.activityForm input,
+.activityForm textarea {
+  margin-top: 0.5rem;
+  width: 80%;
+  height: 2rem;
+  outline: none;
+  border: 1px solid gray;
+  padding-left: 1rem;
+  margin: 1rem 4rem 0;
+  font-size: 1rem;
+  font-family: var(--font-family);
+  border-radius: 5px;
+}
+.activityForm input:focus,
+.activityForm textarea:focus {
+  border: 2px solid var(--button-blue);
+}
+
+.activityForm textarea {
+  height: 4rem;
+}
+.activityFormButtons{
+    width: 100%;
+    margin: 2rem 2rem 2rem 0;
+    display: flex;
+    justify-content: flex-end;
+}
+.activityFormButtons button{
+    width: 5rem;
+    height: 2.5rem;
+    margin-right: 0.5rem;
+    font-family: var(--font-family);
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+.activityFormButtons button:hover{
+    width: 5.2rem;
+    height: 2.7rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+.submitButton{
+    background-color: var(--button-green) ;
+    font-weight: 500;
+}
+.cancelButton{
+    background-color: darkgray;
+}
+
+@media screen and (max-width: 1300px) {
+    .activityForm {
+      width: 80%;
+    }
+  }
+  @media screen and (max-width: 900px) {
+    .activityForm {
+      width: 100%;
+    }
+  }

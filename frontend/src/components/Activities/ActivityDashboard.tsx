@@ -1,6 +1,7 @@
 import { Activity } from '../../models/activity';
 import classes from './ActivityDashboard.module.css';
 import ActivityDetail from './ActivityDetails/ActivityDetail';
+import ActivityForm from './ActivityForm/ActivityForm';
 import ActivityList from './ActivityList/ActivityList';
 type Props = {
   children?: React.ReactNode;
@@ -14,6 +15,7 @@ const ActivityDashboard: React.FC<Props> = ({ activities }) => {
       </div>
       <div className={classes.activityContainer}>
           <ActivityDetail activity={activities[0]}/>
+          <ActivityForm/>
       </div>
     </div>
   );
