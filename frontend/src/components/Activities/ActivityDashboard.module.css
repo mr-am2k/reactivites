@@ -1,7 +1,31 @@
-.activityList{
-    width: 50%;
-    background-color: var(--color-white);
-    border: 1px solid gray;
-    border-radius: 1rem;
-    padding-left: 1rem;
+.dashboardContainer {
+  display: flex;
+}
+.activityList {
+  background-color: var(--color-white);
+  border: 1px solid gray;
+  border-radius: 1rem;
+  padding-left: 1rem;
+  width: 60%;
+}
+.activityContainer {
+    display: flex;
+    justify-content: center;
+  width: 40%;
+  margin-left: 1rem;
+}
+@media screen and (max-width: 650px) {
+  .dashboardContainer {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    width: 100%;
+  }
+  .activityList {
+    width: 80%;
+    margin-top: 5rem;
+  }
+  .activityContainer {
+    width: 80%;
+  }
 }

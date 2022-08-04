@@ -1,4 +1,4 @@
-import { Activity } from '../../models/activity';
+import { Activity } from '../../../models/activity';
 import classes from './ActivityList.module.css';
 type Props = {
   children?: React.ReactNode;

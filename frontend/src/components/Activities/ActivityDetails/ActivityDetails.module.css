@@ -1,0 +1,76 @@
+.activityContainer {
+  width: 60%;
+  height: 22rem;
+  background-color: var(--color-white);
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+.activityImage {
+  border-radius: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.activityContainer img {
+  width: 100%;
+  height: 10rem;
+  flex-shrink: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+.activityContent {
+  line-height: 1rem;
+  padding: 0.5rem 1rem 0;
+  font-family: var(--font-family);
+}
+.activityButtons {
+  padding: 0.5rem 1rem 0;
+  display: flex;
+  justify-content: center;
+}
+.activityButtons button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 7rem;
+  height: 2.5rem;
+  background-color: var(--color-white);
+}
+.activityButtons button:hover {
+  font-size: 1.2rem;
+  cursor: pointer;
+  background-color: wheat;
+}
+.editButton {
+  border: 2px solid var(--button-blue);
+  border-right: 0px;
+  color: var(--button-blue);
+  font-family: var(--font-family);
+  font-size: 1rem;
+  border-radius: 5px 0px 0px 5px;
+}
+.cancelButton {
+  border-right: 2px solid black !important;
+  border-radius: 0px 5px 5px 0px;
+  color: #000000;
+  font-family: var(--font-family);
+  font-size: 1rem;
+}
+@media screen and (max-width: 1300px) {
+  .activityContainer {
+    width: 80%;
+  }
+}
+@media screen and (max-width: 900px) {
+  .activityContainer {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .activityContainer {
+    width: 100%;
+    z-index: 0;
+  }
+}

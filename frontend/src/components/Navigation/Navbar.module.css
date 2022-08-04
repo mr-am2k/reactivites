@@ -66,6 +66,7 @@
   background-color: rgba(7, 181, 217, 1);
   width: 10rem;
   height: 10rem;
+  z-index: 1;
 }
 .navbarMobileLinks a {
   color:var(--color-white);
