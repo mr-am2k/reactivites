@@ -4,9 +4,10 @@ import classes from './ActivityDetails.module.css';
 type Props = {
   children?: React.ReactNode;
   activity: Activity;
+  cancelSelectedActivity: () => void;
 };
 
-const ActivityDetail: React.FC<Props> = ({ activity }) => {
+const ActivityDetail: React.FC<Props> = ({ activity, cancelSelectedActivity }) => {
   return (
     <div className={classes.activityContainer}>
       <div className={classes.activityImage}>
@@ -22,7 +23,7 @@ const ActivityDetail: React.FC<Props> = ({ activity }) => {
       </div>
       <div className={classes.activityButtons}>
         <button className={classes.editButton}>Edit</button>
-        <button className={classes.cancelButton}>Cancel</button>
+        <button className={classes.cancelButton} onClick={cancelSelectedActivity }>Cancel</button>
       </div>
     </div>
   );

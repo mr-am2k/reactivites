@@ -6,16 +6,27 @@ import ActivityList from './ActivityList/ActivityList';
 type Props = {
   children?: React.ReactNode;
   activities: Activity[];
+  selectedActivity: Activity | undefined;
+  selectingActivity: (id: string) => void;
+  cancelSelectedActivity: () => void;
 };
-const ActivityDashboard: React.FC<Props> = ({ activities }) => {
+const ActivityDashboard: React.FC<Props> = ({
+  activities,
+  selectedActivity,
+  selectingActivity,
+  cancelSelectedActivity,
+}) => {
   return (
     <div className={classes.dashboardContainer}>
       <div className={classes.activityList}>
-        <ActivityList activities={activities} />
+        <ActivityList
+          activities={activities}
+          selectingActivity={selectingActivity}
+        />
       </div>
       <div className={classes.activityContainer}>
-          <ActivityDetail activity={activities[0]}/>
-          <ActivityForm/>
+        {selectedActivity && <ActivityDetail activity={selectedActivity} cancelSelectedActivity={cancelSelectedActivity}/>}
+        <ActivityForm />
       </div>
     </div>
   );

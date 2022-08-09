@@ -5,12 +5,23 @@ import { Navbar, ActivityDashboard } from './components/index';
 import classes from './App.module.css';
 function App() {
   const [activities, setActivities] = useState<Activity[]>([]);
+  const [selectedActivity, setSelectedActivity] = useState<
+    Activity | undefined
+  >(undefined);
 
   const fetchActivities = async () => {
     const response = await axios.get<Activity[]>(
       'http://localhost:5000/api/activities'
     );
     setActivities(response.data);
+  };
+
+  const selectedActivityHandler = (id: string) => {
+    setSelectedActivity(activities.find((activity) => activity.id === id));
+  };
+
+  const cancelSelectActivityHandler = () => {
+    setSelectedActivity(undefined);
   };
 
   useEffect(() => {
@@ -21,7 +32,12 @@ function App() {
     <Fragment>
       <Navbar />
       <div className={classes.appContainer}>
-          <ActivityDashboard activities={activities} />
+        <ActivityDashboard 
+        activities={activities}
+        selectedActivity = {selectedActivity}
+        selectingActivity = {selectedActivityHandler}
+        cancelSelectedActivity = {cancelSelectActivityHandler}
+        />
       </div>
     </Fragment>
   );

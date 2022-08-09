@@ -3,9 +3,11 @@ import classes from './ActivityList.module.css';
 type Props = {
   children?: React.ReactNode;
   activities: Activity[];
+  selectingActivity: (id: string) => void;
+
 };
 
-const ActivityList: React.FC<Props> = ({ activities }) => {
+const ActivityList: React.FC<Props> = ({ activities, selectingActivity }) => {
   return (
     <>
       {activities.map((activity, index) => (
@@ -19,7 +21,7 @@ const ActivityList: React.FC<Props> = ({ activities }) => {
             <p className={classes.activityCategory}>{activity.category}</p>
           </div>
           <div className={classes.activityButton}>
-            <button>View</button>
+            <button onClick={() => selectingActivity(activity.id)}>View</button>
           </div>
           <hr/>
         </div>
