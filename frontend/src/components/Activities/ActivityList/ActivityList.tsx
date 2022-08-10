@@ -4,10 +4,14 @@ type Props = {
   children?: React.ReactNode;
   activities: Activity[];
   selectingActivity: (id: string) => void;
-
+  closeForm: () => void;
 };
 
-const ActivityList: React.FC<Props> = ({ activities, selectingActivity }) => {
+const ActivityList: React.FC<Props> = ({
+  activities,
+  selectingActivity,
+  closeForm,
+}) => {
   return (
     <>
       {activities.map((activity, index) => (
@@ -21,9 +25,16 @@ const ActivityList: React.FC<Props> = ({ activities, selectingActivity }) => {
             <p className={classes.activityCategory}>{activity.category}</p>
           </div>
           <div className={classes.activityButton}>
-            <button onClick={() => selectingActivity(activity.id)}>View</button>
+            <button
+              onClick={() => {
+                selectingActivity(activity.id);
+                closeForm();
+              }}
+            >
+              View
+            </button>
           </div>
-          <hr/>
+          <hr />
         </div>
       ))}
     </>

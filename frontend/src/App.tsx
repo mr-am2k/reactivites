@@ -8,6 +8,7 @@ function App() {
   const [selectedActivity, setSelectedActivity] = useState<
     Activity | undefined
   >(undefined);
+  const [editMode, setEditMode] = useState(false);
 
   const fetchActivities = async () => {
     const response = await axios.get<Activity[]>(
@@ -24,19 +25,31 @@ function App() {
     setSelectedActivity(undefined);
   };
 
+  const openFormHandler = (id?: string) => {
+    id ? selectedActivityHandler(id) : cancelSelectActivityHandler();
+    setEditMode(true);
+  };
+
+  const closeFormHandler = () => {
+    setEditMode(false);
+  };
+
   useEffect(() => {
     fetchActivities();
   }, []);
 
   return (
     <Fragment>
-      <Navbar />
+      <Navbar openForm={openFormHandler} />
       <div className={classes.appContainer}>
-        <ActivityDashboard 
-        activities={activities}
-        selectedActivity = {selectedActivity}
-        selectingActivity = {selectedActivityHandler}
-        cancelSelectedActivity = {cancelSelectActivityHandler}
+        <ActivityDashboard
+          activities={activities}
+          selectedActivity={selectedActivity}
+          selectingActivity={selectedActivityHandler}
+          cancelSelectedActivity={cancelSelectActivityHandler}
+          editMode={editMode}
+          openForm={openFormHandler}
+          closeForm={closeFormHandler}
         />
       </div>
     </Fragment>

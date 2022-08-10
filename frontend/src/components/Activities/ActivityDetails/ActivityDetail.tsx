@@ -5,9 +5,10 @@ type Props = {
   children?: React.ReactNode;
   activity: Activity;
   cancelSelectedActivity: () => void;
+  openForm: (id:string) => void;
 };
 
-const ActivityDetail: React.FC<Props> = ({ activity, cancelSelectedActivity }) => {
+const ActivityDetail: React.FC<Props> = ({ activity, cancelSelectedActivity, openForm }) => {
   return (
     <div className={classes.activityContainer}>
       <div className={classes.activityImage}>
@@ -22,7 +23,7 @@ const ActivityDetail: React.FC<Props> = ({ activity, cancelSelectedActivity }) =
         <p>{activity?.description}</p>
       </div>
       <div className={classes.activityButtons}>
-        <button className={classes.editButton}>Edit</button>
+        <button className={classes.editButton} onClick={() => openForm(activity.id)}>Edit</button>
         <button className={classes.cancelButton} onClick={cancelSelectedActivity }>Cancel</button>
       </div>
     </div>
