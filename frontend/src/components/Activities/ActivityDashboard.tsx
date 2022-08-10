@@ -14,6 +14,8 @@ type Props = {
   closeForm: () => void;
   createOrEditActivity: (activity: Activity) => void;
   deleteActivity: (id: string) => void;
+  submitting: boolean
+  deleting: boolean
 };
 const ActivityDashboard: React.FC<Props> = ({
   activities,
@@ -24,7 +26,9 @@ const ActivityDashboard: React.FC<Props> = ({
   openForm,
   closeForm,
   createOrEditActivity,
-  deleteActivity
+  deleteActivity,
+  submitting,
+  deleting
 }) => {
   return (
     <div className={classes.dashboardContainer}>
@@ -34,6 +38,7 @@ const ActivityDashboard: React.FC<Props> = ({
           selectingActivity={selectingActivity}
           closeForm={closeForm}
           deleteActivity={deleteActivity}
+          deleting={deleting}
         />
       </div>
       <div className={classes.activityContainer}>
@@ -49,6 +54,7 @@ const ActivityDashboard: React.FC<Props> = ({
             closeForm={closeForm}
             activity={selectedActivity}
             createOrEditActivity={createOrEditActivity}
+            submitting={submitting}
           />
         )}
       </div>

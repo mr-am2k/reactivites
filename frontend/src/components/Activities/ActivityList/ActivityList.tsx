@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Activity } from '../../../models/activity';
 import classes from './ActivityList.module.css';
 type Props = {
@@ -6,14 +7,24 @@ type Props = {
   selectingActivity: (id: string) => void;
   closeForm: () => void;
   deleteActivity: (id: string) => void;
+  deleting: boolean;
 };
 
 const ActivityList: React.FC<Props> = ({
   activities,
   selectingActivity,
   closeForm,
-  deleteActivity
+  deleteActivity,
+  deleting,
 }) => {
+  const [target, setTarget] = useState('');
+  const activityDeleteHandler = (
+    event: React.SyntheticEvent<HTMLButtonElement>,
+    id: string
+  ) => {
+    setTarget(event.currentTarget.name);
+    deleteActivity(id);
+  };
   return (
     <>
       {activities.map((activity, index) => (
@@ -36,14 +47,39 @@ const ActivityList: React.FC<Props> = ({
             >
               View
             </button>
-            <button
-             className={classes.deleteButton}
-              onClick={() => {
-                deleteActivity(activity.id);
-              }}
-            >
-              Delete Activity
-            </button>
+            {deleting && target === activity.id && (
+              <button
+                name={activity.id}
+                className={classes.deleteButton}
+                onClick={(event) => {
+                  activityDeleteHandler(event, activity.id);
+                }}
+              >
+                Loading...
+              </button>
+            )}
+            {deleting && target !== activity.id && (
+              <button
+                name={activity.id}
+                className={classes.deleteButton}
+                onClick={(event) => {
+                  activityDeleteHandler(event, activity.id);
+                }}
+              >
+                Delete Activity
+              </button>
+            )}
+            {!deleting && (
+              <button
+                name={activity.id}
+                className={classes.deleteButton}
+                onClick={(event) => {
+                  activityDeleteHandler(event, activity.id);
+                }}
+              >
+                Delete Activity
+              </button>
+            )}
           </div>
           <hr />
         </div>

@@ -6,13 +6,15 @@ type Props = {
   children?: React.ReactNode;
   activity: Activity | undefined;
   closeForm: () => void;
-  createOrEditActivity: (activity:Activity) => void
+  createOrEditActivity: (activity:Activity) => void;
+  submitting: boolean
 };
 
 const ActivityForm: React.FC<Props> = ({
   activity: selectedActivity,
   closeForm,
-  createOrEditActivity
+  createOrEditActivity,
+  submitting
 }) => {
   const initialState = selectedActivity ?? {
     id: '',
@@ -58,6 +60,7 @@ const ActivityForm: React.FC<Props> = ({
         onChange={inputChangeHandler}
       />
       <input
+        type='date'
         placeholder='Date'
         value={activity.date}
         name='date'
@@ -76,9 +79,17 @@ const ActivityForm: React.FC<Props> = ({
         onChange={inputChangeHandler}
       />
       <div className={classes.activityFormButtons}>
-        <button className={classes.submitButton} type='submit'>
+        {submitting && (
+          <button className={classes.submitButtonLoading} type='submit'>
+          Loading...
+        </button>
+        )}
+        {!submitting && (
+          <button className={classes.submitButton} type='submit'>
           Submit
         </button>
+        )}
+
         <button className={classes.cancelButton} onClick={closeForm}>
           Cancel
         </button>

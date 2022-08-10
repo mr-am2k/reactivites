@@ -54,6 +54,10 @@
     background-color: var(--button-green) ;
     font-weight: 500;
 }
+.submitButtonLoading{
+  background-color: var(--button-green) ;
+  font-size: 0.8rem !important;
+}
 .cancelButton{
     background-color: darkgray;
 }
