@@ -31,18 +31,23 @@
     align-items: flex-end;
     justify-content: flex-end;
 }
-.activityButton button{
+.viewButton, .deleteButton{
     width: 7rem;
     height: 3rem;
     margin-right: 1rem;
     border-radius: 0.3rem;
     border: none;
-    background-color:#1e90ff;
     font-size: 1.2rem;
     font-family: var(--font-family);
     color:var(--color-white);
 }
-.activityButton button:hover{
+.viewButton{
+    background-color:#1e90ff;
+}
+.deleteButton{
+    background-color: red;
+}
+.viewButton:hover, .deleteButton:hover{
     outline: 2px solid gray;
     cursor: pointer;
     font-size: 1.3rem;
@@ -50,6 +55,9 @@
 @media screen and (max-width:1050px) {
     .activityContainer{
       flex-direction: column;
+    }
+    .activityButton {
+        width:50%;
     }
 }
 @media screen and (max-width:850px) {
@@ -64,11 +72,14 @@
     }
     .activityButton{
         margin-top: 1rem;
-        justify-content: flex-start;
+        align-items: flex-start;
+        flex-direction: column;
     }
-    .activityButton button{
+    .viewButton, .deleteButton{
         width: 5rem;
-        height: 2rem;
+        height: 3rem;
+        margin-bottom: 1rem;
+        font-size: 1rem;
     }
 }
 @media screen and (max-width:550px) {

@@ -2,6 +2,7 @@ import { useState, useEffect, Fragment } from 'react';
 import axios from 'axios';
 import { Activity } from './models/activity';
 import { Navbar, ActivityDashboard } from './components/index';
+import {v4 as uuid} from 'uuid'
 import classes from './App.module.css';
 function App() {
   const [activities, setActivities] = useState<Activity[]>([]);
@@ -34,6 +35,21 @@ function App() {
     setEditMode(false);
   };
 
+  const createOrEditActivityHandler = (activity: Activity) => {
+    activity.id
+      ? setActivities([
+          ...activities.filter((oldActivity) => oldActivity.id !== activity.id),
+          activity,
+        ])
+      : setActivities([...activities, {...activity, id: uuid()}]); //solving problem with id creation using uuid package
+    setEditMode(false);
+    setSelectedActivity(activity);
+  };
+
+  const deleteActivityHandler=(id:string)=> {
+    setActivities([...activities.filter(activity => activity.id !== id)])
+  }
+
   useEffect(() => {
     fetchActivities();
   }, []);
@@ -50,6 +66,8 @@ function App() {
           editMode={editMode}
           openForm={openFormHandler}
           closeForm={closeFormHandler}
+          createOrEditActivity={createOrEditActivityHandler}
+          deleteActivity = {deleteActivityHandler}
         />
       </div>
     </Fragment>

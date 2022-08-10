@@ -5,12 +5,14 @@ type Props = {
   activities: Activity[];
   selectingActivity: (id: string) => void;
   closeForm: () => void;
+  deleteActivity: (id: string) => void;
 };
 
 const ActivityList: React.FC<Props> = ({
   activities,
   selectingActivity,
   closeForm,
+  deleteActivity
 }) => {
   return (
     <>
@@ -26,12 +28,21 @@ const ActivityList: React.FC<Props> = ({
           </div>
           <div className={classes.activityButton}>
             <button
+              className={classes.viewButton}
               onClick={() => {
                 selectingActivity(activity.id);
                 closeForm();
               }}
             >
               View
+            </button>
+            <button
+             className={classes.deleteButton}
+              onClick={() => {
+                deleteActivity(activity.id);
+              }}
+            >
+              Delete Activity
             </button>
           </div>
           <hr />

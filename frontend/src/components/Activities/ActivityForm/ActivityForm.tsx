@@ -6,11 +6,13 @@ type Props = {
   children?: React.ReactNode;
   activity: Activity | undefined;
   closeForm: () => void;
+  createOrEditActivity: (activity:Activity) => void
 };
 
 const ActivityForm: React.FC<Props> = ({
   activity: selectedActivity,
   closeForm,
+  createOrEditActivity
 }) => {
   const initialState = selectedActivity ?? {
     id: '',
@@ -25,7 +27,7 @@ const ActivityForm: React.FC<Props> = ({
 
   const submitHandler = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(activity);
+    createOrEditActivity(activity)
   };
   const inputChangeHandler = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> ) => {
     const { name, value } = event.target;

@@ -12,6 +12,8 @@ type Props = {
   editMode: boolean;
   openForm: (id: string) => void;
   closeForm: () => void;
+  createOrEditActivity: (activity: Activity) => void;
+  deleteActivity: (id: string) => void;
 };
 const ActivityDashboard: React.FC<Props> = ({
   activities,
@@ -21,6 +23,8 @@ const ActivityDashboard: React.FC<Props> = ({
   editMode,
   openForm,
   closeForm,
+  createOrEditActivity,
+  deleteActivity
 }) => {
   return (
     <div className={classes.dashboardContainer}>
@@ -29,10 +33,11 @@ const ActivityDashboard: React.FC<Props> = ({
           activities={activities}
           selectingActivity={selectingActivity}
           closeForm={closeForm}
+          deleteActivity={deleteActivity}
         />
       </div>
       <div className={classes.activityContainer}>
-        {selectedActivity && !editMode &&(
+        {selectedActivity && !editMode && (
           <ActivityDetail
             activity={selectedActivity}
             cancelSelectedActivity={cancelSelectedActivity}
@@ -40,7 +45,11 @@ const ActivityDashboard: React.FC<Props> = ({
           />
         )}
         {editMode && (
-          <ActivityForm closeForm={closeForm} activity={selectedActivity} />
+          <ActivityForm
+            closeForm={closeForm}
+            activity={selectedActivity}
+            createOrEditActivity={createOrEditActivity}
+          />
         )}
       </div>
     </div>
