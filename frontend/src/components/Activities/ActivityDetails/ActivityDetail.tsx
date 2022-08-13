@@ -1,14 +1,17 @@
 import { Activity } from '../../../models/activity';
+import {  useSelector } from 'react-redux';
+import { activityActions } from '../../../store/slices/activity-slice';
+import { useAppDispatch, RootState } from '../../../store/store';
 import classes from './ActivityDetails.module.css';
 
 type Props = {
   children?: React.ReactNode;
-  activity: Activity;
-  cancelSelectedActivity: () => void;
   openForm: (id:string) => void;
 };
 
-const ActivityDetail: React.FC<Props> = ({ activity, cancelSelectedActivity, openForm }) => {
+const ActivityDetail: React.FC<Props> = ({ openForm }) => {
+  const activity = useSelector((state:RootState) => state.activities.selectedActivity)
+  const dispatch = useAppDispatch()
   return (
     <div className={classes.activityContainer}>
       <div className={classes.activityImage}>
@@ -23,8 +26,8 @@ const ActivityDetail: React.FC<Props> = ({ activity, cancelSelectedActivity, ope
         <p>{activity?.description}</p>
       </div>
       <div className={classes.activityButtons}>
-        <button className={classes.editButton} onClick={() => openForm(activity.id)}>Edit</button>
-        <button className={classes.cancelButton} onClick={cancelSelectedActivity }>Cancel</button>
+        <button className={classes.editButton} onClick={() => openForm(activity!.id)}>Edit</button>
+        <button className={classes.cancelButton} onClick={() => {dispatch(activityActions.cancelSelectedActivity())} }>Cancel</button>
       </div>
     </div>
   );

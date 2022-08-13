@@ -1,24 +1,18 @@
 import { useState } from 'react';
-import { Activity } from '../../../models/activity';
+import { changeSelectedActivity } from '../../../store/actions/activity-actions';
+import { useAppDispatch, RootState } from '../../../store/store';
 import { useSelector } from 'react-redux';
-import { RootState } from "../../../store/store"
-
 import classes from './ActivityList.module.css';
-import store from '../../../store/store';
 type Props = {
   children?: React.ReactNode;
-  activities: Activity[];
-  selectingActivity: (id: string) => void;
   closeForm: () => void;
-  deleteActivity: (id: string) => void;};
+  deleteActivity: (id: string) => void;
+};
 
-const ActivityList: React.FC<Props> = ({
-  activities,
-  selectingActivity,
-  closeForm,
-  deleteActivity,
-}) => {
-  const deleting = useSelector((state:RootState) => state.activities.deleting)
+const ActivityList: React.FC<Props> = ({ closeForm, deleteActivity }) => {
+  const activities = useSelector((state: RootState) => state.activities.activities);
+  const deleting = useSelector((state: RootState) => state.activities.deleting);
+  const dispatch = useAppDispatch();
   const [target, setTarget] = useState('');
   const activityDeleteHandler = (
     event: React.SyntheticEvent<HTMLButtonElement>,
@@ -43,7 +37,7 @@ const ActivityList: React.FC<Props> = ({
             <button
               className={classes.viewButton}
               onClick={() => {
-                selectingActivity(activity.id);
+                dispatch(changeSelectedActivity(activity.id, activities));
                 closeForm();
               }}
             >

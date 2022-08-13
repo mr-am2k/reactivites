@@ -1,14 +1,12 @@
 import { Activity } from '../../models/activity';
+import { useSelector } from 'react-redux';
+import { useAppDispatch,RootState} from '../../store/store';
 import classes from './ActivityDashboard.module.css';
 import ActivityDetail from './ActivityDetails/ActivityDetail';
 import ActivityForm from './ActivityForm/ActivityForm';
 import ActivityList from './ActivityList/ActivityList';
 type Props = {
   children?: React.ReactNode;
-  activities: Activity[];
-  selectedActivity: Activity | undefined;
-  selectingActivity: (id: string) => void;
-  cancelSelectedActivity: () => void;
   editMode: boolean;
   openForm: (id: string) => void;
   closeForm: () => void;
@@ -17,10 +15,6 @@ type Props = {
   submitting: boolean
 };
 const ActivityDashboard: React.FC<Props> = ({
-  activities,
-  selectedActivity,
-  selectingActivity,
-  cancelSelectedActivity,
   editMode,
   openForm,
   closeForm,
@@ -28,12 +22,11 @@ const ActivityDashboard: React.FC<Props> = ({
   deleteActivity,
   submitting,
 }) => {
+  const selectedActivity = useSelector((state:RootState) => state.activities.selectedActivity)
   return (
     <div className={classes.dashboardContainer}>
       <div className={classes.activityList}>
         <ActivityList
-          activities={activities}
-          selectingActivity={selectingActivity}
           closeForm={closeForm}
           deleteActivity={deleteActivity}
         />
@@ -41,15 +34,12 @@ const ActivityDashboard: React.FC<Props> = ({
       <div className={classes.activityContainer}>
         {selectedActivity && !editMode && (
           <ActivityDetail
-            activity={selectedActivity}
-            cancelSelectedActivity={cancelSelectedActivity}
             openForm={openForm}
           />
         )}
         {editMode && (
           <ActivityForm
             closeForm={closeForm}
-            activity={selectedActivity}
             createOrEditActivity={createOrEditActivity}
             submitting={submitting}
           />

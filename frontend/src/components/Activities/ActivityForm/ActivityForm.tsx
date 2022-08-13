@@ -1,21 +1,22 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Activity } from '../../../models/activity';
+import { RootState } from '../../../store/store';
 import classes from './ActivityForm.module.css';
 
 type Props = {
   children?: React.ReactNode;
-  activity: Activity | undefined;
   closeForm: () => void;
   createOrEditActivity: (activity:Activity) => void;
   submitting: boolean
 };
 
 const ActivityForm: React.FC<Props> = ({
-  activity: selectedActivity,
   closeForm,
   createOrEditActivity,
   submitting
 }) => {
+  const selectedActivity = useSelector((state:RootState) => state.activities.selectedActivity)
   const initialState = selectedActivity ?? {
     id: '',
     title: '',

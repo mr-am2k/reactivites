@@ -2,31 +2,25 @@ import { useState, useEffect, Fragment } from 'react';
 import { Activity } from './models/activity';
 import { Navbar, ActivityDashboard } from './components/index';
 import { v4 as uuid } from 'uuid';
-import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { useAppDispatch,RootState} from './store/store';
+import { fetchActivities } from './store/actions/activity-actions';
+import { activityActions } from './store/slices/activity-slice';
 import classes from './App.module.css';
 import agent from './api/agent';
 import Loading from './UI/Loading';
-import { activityActions } from './store/slices/activity-slice';
 function App() {
-  const dispatch=useDispatch()
+  const dispatch=useAppDispatch()
   const [activities, setActivities] = useState<Activity[]>([]);
   const [selectedActivity, setSelectedActivity] = useState<
     Activity | undefined
   >(undefined);
   const [editMode, setEditMode] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const activities2 = useSelector((state:RootState) => state.activities.activities)
 
-  const fetchActivities = async () => {
-    const response = await agent.Activities.list();
-    let activities: Activity[] = [];
-    response.forEach((activity) => {
-      activity.date = activity.date.split('T')[0];
-      activities.push(activity);
-    });
-    setActivities(activities);
-    setLoading(false);
-  };
+
 
   const selectedActivityHandler = (id: string) => {
     setSelectedActivity(activities.find((activity) => activity.id === id));
@@ -80,8 +74,8 @@ function App() {
   };
 
   useEffect(() => {
-    fetchActivities();
-  }, []);
+    dispatch(fetchActivities())
+  }, [dispatch]);
 
   if (loading) return <Loading content='Loading app...' />;
 
@@ -90,10 +84,6 @@ function App() {
       <Navbar openForm={openFormHandler} />
       <div className={classes.appContainer}>
         <ActivityDashboard
-          activities={activities}
-          selectedActivity={selectedActivity}
-          selectingActivity={selectedActivityHandler}
-          cancelSelectedActivity={cancelSelectActivityHandler}
           editMode={editMode}
           openForm={openFormHandler}
           closeForm={closeFormHandler}
