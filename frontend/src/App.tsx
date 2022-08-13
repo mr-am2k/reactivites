@@ -2,10 +2,13 @@ import { useState, useEffect, Fragment } from 'react';
 import { Activity } from './models/activity';
 import { Navbar, ActivityDashboard } from './components/index';
 import { v4 as uuid } from 'uuid';
+import { useDispatch } from 'react-redux';
 import classes from './App.module.css';
 import agent from './api/agent';
 import Loading from './UI/Loading';
+import { activityActions } from './store/slices/activity-slice';
 function App() {
+  const dispatch=useDispatch()
   const [activities, setActivities] = useState<Activity[]>([]);
   const [selectedActivity, setSelectedActivity] = useState<
     Activity | undefined
@@ -13,7 +16,6 @@ function App() {
   const [editMode, setEditMode] = useState(false);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
-  const [deleting, setDeleting] = useState(false)
 
   const fetchActivities = async () => {
     const response = await agent.Activities.list();
@@ -67,13 +69,13 @@ function App() {
   };
 
   const deleteActivityHandler = (id: string) => {
-    setDeleting(true)
+    dispatch(activityActions.setDeleting(true))
     if(selectedActivity?.id === id) {
       setSelectedActivity(undefined)
     }
     agent.Activities.delete(id).then(() => {
       setActivities([...activities.filter((activity) => activity.id !== id)]);
-      setDeleting(false)
+      dispatch(activityActions.setDeleting(false))
     });
   };
 
@@ -98,7 +100,6 @@ function App() {
           createOrEditActivity={createOrEditActivityHandler}
           deleteActivity={deleteActivityHandler}
           submitting={submitting}
-          deleting={deleting}
         />
       </div>
     </Fragment>

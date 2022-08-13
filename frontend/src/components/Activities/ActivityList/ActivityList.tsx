@@ -1,22 +1,24 @@
 import { useState } from 'react';
 import { Activity } from '../../../models/activity';
+import { useSelector } from 'react-redux';
+import { RootState } from "../../../store/store"
+
 import classes from './ActivityList.module.css';
+import store from '../../../store/store';
 type Props = {
   children?: React.ReactNode;
   activities: Activity[];
   selectingActivity: (id: string) => void;
   closeForm: () => void;
-  deleteActivity: (id: string) => void;
-  deleting: boolean;
-};
+  deleteActivity: (id: string) => void;};
 
 const ActivityList: React.FC<Props> = ({
   activities,
   selectingActivity,
   closeForm,
   deleteActivity,
-  deleting,
 }) => {
+  const deleting = useSelector((state:RootState) => state.activities.deleting)
   const [target, setTarget] = useState('');
   const activityDeleteHandler = (
     event: React.SyntheticEvent<HTMLButtonElement>,

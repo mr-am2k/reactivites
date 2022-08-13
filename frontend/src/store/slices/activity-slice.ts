@@ -1,13 +1,14 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 const activitySlice = createSlice({
   name: 'activity',
   initialState: {
-    test: 'test',
+    deleting: false,
   },
   reducers: {
-    changeStatus(state:any, action:any) {
-      state.test = action.payload;
-    },
+    setDeleting(state: {deleting:boolean}, action: PayloadAction<boolean>){
+      state.deleting = action.payload;
+    }
   },
 });
 export const activityActions = activitySlice.actions;
