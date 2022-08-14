@@ -1,22 +1,23 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Activity } from '../../../models/activity';
-import { RootState } from '../../../store/store';
-import classes from './ActivityForm.module.css';
-
-type Props = {
-  children?: React.ReactNode;
-  closeForm: () => void;
-  createOrEditActivity: (activity:Activity) => void;
-  submitting: boolean
-};
-
-const ActivityForm: React.FC<Props> = ({
+import {
   closeForm,
   createOrEditActivity,
-  submitting
-}) => {
-  const selectedActivity = useSelector((state:RootState) => state.activities.selectedActivity)
+} from '../../../store/actions/activity-actions';
+import { useAppDispatch, RootState } from '../../../store/store';
+import classes from './ActivityForm.module.css';
+
+const ActivityForm = () => {
+  const dispatch = useAppDispatch();
+  const selectedActivity = useSelector(
+    (state: RootState) => state.activities.selectedActivity
+  );
+  const activities = useSelector(
+    (state: RootState) => state.activities.activities
+  );
+  const submitting = useSelector(
+    (state: RootState) => state.activities.submitting
+  );
   const initialState = selectedActivity ?? {
     id: '',
     title: '',
@@ -30,9 +31,11 @@ const ActivityForm: React.FC<Props> = ({
 
   const submitHandler = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    createOrEditActivity(activity)
+    dispatch(createOrEditActivity(activity, activities));
   };
-  const inputChangeHandler = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> ) => {
+  const inputChangeHandler = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = event.target;
     setActivity({ ...activity, [name]: value });
   };
@@ -82,16 +85,21 @@ const ActivityForm: React.FC<Props> = ({
       <div className={classes.activityFormButtons}>
         {submitting && (
           <button className={classes.submitButtonLoading} type='submit'>
-          Loading...
-        </button>
+            Loading...
+          </button>
         )}
         {!submitting && (
           <button className={classes.submitButton} type='submit'>
-          Submit
-        </button>
+            Submit
+          </button>
         )}
 
-        <button className={classes.cancelButton} onClick={closeForm}>
+        <button
+          className={classes.cancelButton}
+          onClick={() => {
+            dispatch(closeForm());
+          }}
+        >
           Cancel
         </button>
       </div>

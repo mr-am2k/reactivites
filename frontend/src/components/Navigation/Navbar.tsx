@@ -1,13 +1,11 @@
 import { useState } from 'react';
+import { openForm } from '../../store/actions/activity-actions';
+import { useAppDispatch } from '../../store/store';
 import GroupsIcon from '@mui/icons-material/Groups';
 import classes from './Navbar.module.css';
 
-type Props = {
-  children?: React.ReactNode;
-  openForm: () => void;
-};
-
-const Navbar: React.FC<Props> = ({ openForm }) => {
+const Navbar = () => {
+  const dispatch = useAppDispatch();
   const [mobileLinks, setMobileLinks] = useState(false);
   const menuHandler = () => {
     setMobileLinks((prevState) => {
@@ -24,7 +22,13 @@ const Navbar: React.FC<Props> = ({ openForm }) => {
         <div className={classes.navbarDesktopLinks}>
           <a href='#home'> Reactivities </a>
           <a href='#activities'> Activities </a>
-          <button onClick={openForm}>Create Activity</button>
+          <button
+            onClick={() => {
+              dispatch(openForm());
+            }}
+          >
+            Create Activity
+          </button>
         </div>
         <div className={classes.navbarMobileContainer}>
           <button className={classes.menuButton} onClick={menuHandler}>
@@ -43,8 +47,8 @@ const Navbar: React.FC<Props> = ({ openForm }) => {
               <button
                 className={classes.activityMobileButton}
                 onClick={() => {
-                    openForm()
-                    closeMenu()
+                  openForm();
+                  closeMenu();
                 }}
               >
                 Create Activity

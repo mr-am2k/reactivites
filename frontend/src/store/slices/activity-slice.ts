@@ -4,12 +4,18 @@ import { Activity } from '../../models/activity';
 type ActivityStore = {
   activities: Activity[];
   selectedActivity: Activity | undefined;
+  editMode: boolean;
+  loading: boolean;
+  submitting: boolean;
   deleting: boolean;
 };
 
 const initialState: ActivityStore = {
   activities: [],
   selectedActivity: undefined,
+  editMode: false,
+  loading: true,
+  submitting: false,
   deleting: false,
 };
 
@@ -29,11 +35,21 @@ const activitySlice = createSlice({
     cancelSelectedActivity(state: ActivityStore) {
       state.selectedActivity = undefined;
     },
-    setDeleting(state: ActivityStore, action: PayloadAction<boolean>) {
+    changeEditMode(state: ActivityStore, action: PayloadAction<boolean>) {
+      state.editMode = action.payload;
+    },
+    changeLoading(state: ActivityStore, action: PayloadAction<boolean>) {
+      state.loading = action.payload;
+    },
+    changeSubmitting(state: ActivityStore, action: PayloadAction<boolean>) {
+      state.submitting = action.payload;
+    },
+    changeDeleting(state: ActivityStore, action: PayloadAction<boolean>) {
       state.deleting = action.payload;
     },
   },
 });
+
 export const activityActions = activitySlice.actions;
 
 export default activitySlice;
