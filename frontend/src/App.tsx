@@ -11,6 +11,7 @@ function App() {
   const loading = useSelector((state: RootState) => state.activities.loading);
 
   const onPageLoad = useCallback(async () => {
+    //this code is in separate function, because changeLoading needs to happen after fetching activities and async await can't be used in useEffect
     await dispatch(fetchActivities());
     dispatch(activityActions.changeLoading(false));
   }, [dispatch]);
