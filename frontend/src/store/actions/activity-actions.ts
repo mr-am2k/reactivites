@@ -6,7 +6,7 @@ import { Activity } from '../../models/activity';
 
 export const fetchActivities = () => {
   return async (dispatch: AppDispatch) => {
-    try{
+    try {
       const data = await agent.Activities.list();
       let activities: Activity[] = [];
       data.forEach((activity: Activity) => {
@@ -14,10 +14,9 @@ export const fetchActivities = () => {
         activities.push(activity);
       });
       dispatch(activityActions.setActivities(activities));
-    }catch(error){
-      console.log(error)
+    } catch (error) {
+      console.log(error);
     }
-
   };
 };
 
@@ -49,36 +48,38 @@ export const createOrEditActivity = (
 ) => {
   return async (dispatch: AppDispatch) => {
     dispatch(activityActions.changeSubmitting(true));
-    try{
-      if (activity.id) {
-        //if id exists that means that we need to edit activity
-        agent.Activities.update(activity).then(() => {
-          dispatch(
-            activityActions.setActivities([
-              ...activities.filter(
-                (oldActivity) => oldActivity.id !== activity.id
-              ),
-              activity,
-            ])
-          );
-          dispatch(activityActions.changeEditMode(false));
-          dispatch(activityActions.setSelectedActivity(activity));
-          dispatch(activityActions.changeSubmitting(false));
-        });
-      } else {
-        //if id doesn't exist that means that we need to add new activity
-        activity.id = uuid();
-        agent.Activities.create(activity).then(() => {
-          dispatch(activityActions.setActivities([...activities, activity]));
-          dispatch(activityActions.changeEditMode(false));
-          dispatch(activityActions.setSelectedActivity(activity));
-          dispatch(activityActions.changeSubmitting(false));
-        });
+
+    if (activity.id) {
+      //if id exists that means that we need to edit activity
+      try {
+        await agent.Activities.update(activity);
+        dispatch(
+          activityActions.setActivities([
+            ...activities.filter(
+              (oldActivity) => oldActivity.id !== activity.id
+            ),
+            activity,
+          ])
+        );
+        dispatch(activityActions.changeEditMode(false));
+        dispatch(activityActions.setSelectedActivity(activity));
+        dispatch(activityActions.changeSubmitting(false));
+      } catch (error) {
+        console.log(error);
       }
-    }catch(error){
-      console.log(error)
+    } else {
+      //if id doesn't exist that means that we need to add new activity
+      activity.id = uuid();
+      try {
+        await agent.Activities.create(activity);
+        dispatch(activityActions.setActivities([...activities, activity]));
+        dispatch(activityActions.changeEditMode(false));
+        dispatch(activityActions.setSelectedActivity(activity));
+        dispatch(activityActions.changeSubmitting(false));
+      } catch (error) {
+        console.log(error);
+      }
     }
-    
   };
 };
 
@@ -87,18 +88,21 @@ export const deleteActivity = (
   selectedActivity: Activity,
   activities: Activity[]
 ) => {
-  return (dispatch: AppDispatch) => {
-    dispatch(activityActions.changeDeleting(true));
-    if (selectedActivity.id === id) {
-      dispatch(activityActions.cancelSelectedActivity());
-    }
-    agent.Activities.delete(id).then(() => {
+  return async (dispatch: AppDispatch) => {
+    try {
+      dispatch(activityActions.changeDeleting(true));
+      if (selectedActivity.id === id) {
+        dispatch(activityActions.cancelSelectedActivity());
+      }
+      await agent.Activities.delete(id);
       dispatch(
         activityActions.setActivities([
           ...activities.filter((activity) => activity.id !== id),
         ])
       );
       dispatch(activityActions.changeDeleting(false));
-    });
+    } catch (error) {
+      console.log(error);
+    }
   };
 };

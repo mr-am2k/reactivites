@@ -24,7 +24,7 @@ const activitySlice = createSlice({
   initialState,
   reducers: {
     setActivities(state: ActivityStore, action: PayloadAction<Activity[]>) {
-      state.activities = action.payload;
+      state.activities = action.payload.sort((a,b) => Date.parse(a.date) - Date.parse(b.date)) ;
     },
     setSelectedActivity(
       state: ActivityStore,
