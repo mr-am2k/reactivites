@@ -9,20 +9,36 @@ import {
 import classes from './App.module.css';
 import { Route, Routes } from 'react-router-dom';
 
-
 function App() {
   return (
     <Fragment>
-      <Navbar />
-      <div className={classes.appContainer}>
-        <Routes>
-          <Route path='/' element={<HomePage />} />
-          <Route path='/activities' element={<ActivityDashboard />} />
-          <Route path='/activities/:id' element={<ActivityDetail />} />
-          <Route path='/createactivity' element={<ActivityForm />} />
-          <Route path='/manage/:id' element={<ActivityForm />} />
-        </Routes>
-      </div>
+      <Routes>
+        <Route
+          path='/'
+          element={
+            <div className={classes.appContainer}>
+              <HomePage />
+            </div>
+          }
+        />
+
+        <Route
+          path='/*'
+          element={
+            <>
+              <Navbar />
+              <div className={classes.appContainer}>
+                <Routes>
+                  <Route path='/activities' element={<ActivityDashboard />} />
+                  <Route path='/activities/:id' element={<ActivityDetail />} />
+                  <Route path='/createactivity' element={<ActivityForm />} />
+                  <Route path='/manage/:id' element={<ActivityForm />} />
+                </Routes>
+              </div>
+            </>
+          }
+        />
+      </Routes>
     </Fragment>
   );
 }

@@ -9,13 +9,18 @@ import ActivityList from './ActivityList/ActivityList';
 
 const ActivityDashboard = () => {
   const dispatch = useAppDispatch();
+  const activities = useSelector(
+    (state: RootState) => state.activities.activities
+  );
   const loading = useSelector((state: RootState) => state.activities.loading);
 
   const onPageLoad = useCallback(async () => {
     //this code is in separate function, because changeLoading needs to happen after fetching activities and async await can't be used in useEffect
-    await dispatch(fetchActivities());
-    dispatch(activityActions.changeLoading(false));
-  }, [dispatch]);
+    if (activities.length === 0) {
+      await dispatch(fetchActivities());
+      dispatch(activityActions.changeLoading(false));
+    }
+  }, [activities.length, dispatch]);
 
   useEffect(() => {
     onPageLoad();
@@ -29,7 +34,6 @@ const ActivityDashboard = () => {
       </div>
       <div className={classes.activityContainer}>
         <h1>Activity filters</h1>
-
       </div>
     </div>
   );

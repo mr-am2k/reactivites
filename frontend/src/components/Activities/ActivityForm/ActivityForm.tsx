@@ -10,7 +10,6 @@ import classes from './ActivityForm.module.css';
 import Loading from '../../../UI/Loading';
 import { activityActions } from '../../../store/slices/activity-slice';
 import { v4 as uuid } from 'uuid';
-import { Activity } from '../../../models/activity';
 
 const ActivityForm = () => {
   const dispatch = useAppDispatch();
@@ -123,7 +122,7 @@ const ActivityForm = () => {
             Submit
           </button>
         )}
-        <Link to={`/activities/${activity.id}`}>
+        <Link to={'/activities/'}>
           <button className={classes.cancelButton}>Cancel</button>
         </Link>
       </div>

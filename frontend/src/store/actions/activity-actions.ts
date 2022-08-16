@@ -1,7 +1,6 @@
 import { activityActions } from '../slices/activity-slice';
 import { AppDispatch } from '../store';
 import agent from '../../api/agent';
-import { v4 as uuid } from 'uuid';
 import { Activity } from '../../models/activity';
 
 export const fetchActivities = () => {
