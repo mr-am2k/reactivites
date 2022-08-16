@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import {
-  changeSelectedActivity,
-  closeForm,
   deleteActivity,
 } from '../../../store/actions/activity-actions';
 import { useAppDispatch, RootState } from '../../../store/store';
 import { useSelector } from 'react-redux';
 import classes from './ActivityList.module.css';
+import { Link } from 'react-router-dom';
 
 const ActivityList = () => {
   const dispatch = useAppDispatch();
@@ -38,15 +37,10 @@ const ActivityList = () => {
             <p className={classes.activityCategory}>{activity.category}</p>
           </div>
           <div className={classes.activityButton}>
-            <button
-              className={classes.viewButton}
-              onClick={() => {
-                dispatch(changeSelectedActivity(activity.id, activities));
-                dispatch(closeForm());
-              }}
-            >
-              View
-            </button>
+            <Link to={`/activities/${activity.id}`}>
+              <button className={classes.viewButton}>View</button>
+            </Link>
+
             {deleting && target === activity.id && (
               <button
                 name={activity.id}

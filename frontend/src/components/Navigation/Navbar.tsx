@@ -1,11 +1,9 @@
 import { useState } from 'react';
-import { openForm } from '../../store/actions/activity-actions';
-import { useAppDispatch } from '../../store/store';
+import { NavLink } from 'react-router-dom';
 import GroupsIcon from '@mui/icons-material/Groups';
 import classes from './Navbar.module.css';
 
 const Navbar = () => {
-  const dispatch = useAppDispatch();
   const [mobileLinks, setMobileLinks] = useState(false);
   const menuHandler = () => {
     setMobileLinks((prevState) => {
@@ -20,15 +18,11 @@ const Navbar = () => {
       <div className={classes.navbarContent}>
         <GroupsIcon sx={{ fontSize: '2.2rem' }} />
         <div className={classes.navbarDesktopLinks}>
-          <a href='#home'> Reactivities </a>
-          <a href='#activities'> Activities </a>
-          <button
-            onClick={() => {
-              dispatch(openForm());
-            }}
-          >
-            Create Activity
-          </button>
+          <NavLink to='/'>Reactivities</NavLink>
+          <NavLink to='/activities'>Activities</NavLink>
+          <NavLink to='/createActivity'>
+            <button>Create Activity</button>
+          </NavLink>
         </div>
         <div className={classes.navbarMobileContainer}>
           <button className={classes.menuButton} onClick={menuHandler}>
@@ -36,23 +30,15 @@ const Navbar = () => {
           </button>
           {mobileLinks && (
             <div className={classes.navbarMobileLinks}>
-              <a href='#home' onClick={closeMenu}>
-                {' '}
-                Reactivities{' '}
-              </a>
-              <a href='#activities' onClick={closeMenu}>
-                {' '}
-                Activities{' '}
-              </a>
-              <button
-                className={classes.activityMobileButton}
-                onClick={() => {
-                  openForm();
-                  closeMenu();
-                }}
-              >
-                Create Activity
-              </button>
+              <NavLink to='/' onClick={closeMenu}>
+                Reactivities
+              </NavLink>
+              <NavLink to='/activities' onClick={closeMenu}>
+                Activities
+              </NavLink>
+              <NavLink to='/createActivity'>
+                <button onClick={closeMenu} className={classes.activityMobileButton}>Create Activity</button>
+              </NavLink>
             </div>
           )}
         </div>
