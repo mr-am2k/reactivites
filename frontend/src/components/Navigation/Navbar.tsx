@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import GroupsIcon from '@mui/icons-material/Groups';
 import classes from './Navbar.module.css';
 
 const Navbar = () => {
+  const navigate = useNavigate()
   const [mobileLinks, setMobileLinks] = useState(false);
   const menuHandler = () => {
     setMobileLinks((prevState) => {
@@ -20,9 +21,9 @@ const Navbar = () => {
         <div className={classes.navbarDesktopLinks}>
           <NavLink to='/'>Reactivities</NavLink>
           <NavLink to='/activities'>Activities</NavLink>
-          <NavLink to='/createActivity'>
-            <button>Create Activity</button>
-          </NavLink>
+
+            <button onClick={() => {navigate('/createactivity')}}>Create Activity</button>
+
         </div>
         <div className={classes.navbarMobileContainer}>
           <button className={classes.menuButton} onClick={menuHandler}>

@@ -52,8 +52,8 @@ export const createOrEditActivity = (
 ) => {
   return async (dispatch: AppDispatch) => {
     dispatch(activityActions.changeSubmitting(true));
-
-    if (activity.id) {
+    const activityExist = activities.find(act => act.id === activity.id)
+    if (activityExist) {
       //if id exists that means that we need to edit activity
       try {
         await agent.Activities.update(activity);
@@ -72,7 +72,6 @@ export const createOrEditActivity = (
       }
     } else {
       //if id doesn't exist that means that we need to add new activity
-      activity.id = uuid();
       try {
         await agent.Activities.create(activity);
         dispatch(activityActions.setActivities([...activities, activity]));

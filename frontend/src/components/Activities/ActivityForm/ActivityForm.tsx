@@ -1,13 +1,6 @@
-import {
-  ChangeEvent,
-  FormEvent,
-  useCallback,
-  useEffect,
-  useState,
-} from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { activityActions } from '../../../store/slices/activity-slice';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import {
   createOrEditActivity,
   loadActivity,
@@ -15,20 +8,22 @@ import {
 import { useAppDispatch, RootState } from '../../../store/store';
 import classes from './ActivityForm.module.css';
 import Loading from '../../../UI/Loading';
+import { activityActions } from '../../../store/slices/activity-slice';
+import { v4 as uuid } from 'uuid';
+import { Activity } from '../../../models/activity';
 
 const ActivityForm = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const { id } = useParams();
-  const loading = useSelector(
-    (state: RootState) => state.activities.loading
-  );
+  const loading = useSelector((state: RootState) => state.activities.loading);
   const activities = useSelector(
     (state: RootState) => state.activities.activities
   );
   const submitting = useSelector(
     (state: RootState) => state.activities.submitting
   );
-  const [activity, setActivity] = useState({
+  const initialState = {
     id: '',
     title: '',
     date: '',
@@ -36,11 +31,20 @@ const ActivityForm = () => {
     category: '',
     city: '',
     venue: '',
-  });
+  };
+  const [activity, setActivity] = useState(initialState);
 
   const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    await dispatch(createOrEditActivity(activity, activities));
+    //if activity object has id that is empty string, that means that we are creating new activity and that we need to create id for it
+    if (activity.id.length === 0) {
+      const newActivity = { ...activity, id: uuid() };
+      await dispatch(createOrEditActivity(newActivity, activities));
+      navigate(`/activities/${newActivity.id}`);
+    } else {
+      await dispatch(createOrEditActivity(activity, activities));
+      navigate(`/activities/${activity.id}`);
+    }
   };
   const inputChangeHandler = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -49,18 +53,21 @@ const ActivityForm = () => {
     setActivity({ ...activity, [name]: value });
   };
 
-  const onPageLoad = useCallback(async () => {
+  useEffect(() => {
     if (id) {
-      const activity = await dispatch(loadActivity(id, activities));
-      setActivity(activity!);
+      dispatch(loadActivity(id, activities)).then((activity) => {
+        setActivity(activity!);
+        dispatch(activityActions.changeLoading(false));
+      });
+      // if there is no id, that means that we are creating new activity and we need to empty values for input fields
+    } else {
+      setActivity(initialState);
+      dispatch(activityActions.changeLoading(false));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activities, dispatch, id]);
 
-  useEffect(() => {
-    onPageLoad();
-  }, [onPageLoad]);
-
-  if(loading) return <Loading/>
+  if (loading) return <Loading />;
 
   return (
     <form
@@ -112,7 +119,6 @@ const ActivityForm = () => {
           </button>
         )}
         {!submitting && (
-
           <button className={classes.submitButton} type='submit'>
             Submit
           </button>
