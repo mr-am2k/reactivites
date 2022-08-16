@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { loadActivity } from '../../../store/actions/activity-actions';
 import { useAppDispatch, RootState } from '../../../store/store';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import classes from './ActivityDetails.module.css';
 import { useEffect } from 'react';
 import Loading from '../../../UI/Loading';
@@ -37,8 +37,12 @@ const ActivityDetail = () => {
         <p>{activity?.description}</p>
       </div>
       <div className={classes.activityButtons}>
-        <button className={classes.editButton}>Edit</button>
-        <button className={classes.cancelButton}>Cancel</button>
+        <Link to={`/manage/${activity.id}`}>
+          <button className={classes.editButton}>Edit</button>
+        </Link>
+        <Link to='/activities'>
+          <button className={classes.cancelButton}>Cancel</button>
+        </Link>
       </div>
     </div>
   );

@@ -6,7 +6,7 @@ import { Activity } from '../../models/activity';
 
 export const fetchActivities = () => {
   return async (dispatch: AppDispatch) => {
-    dispatch(activityActions.changeLoading(true))
+    dispatch(activityActions.changeLoading(true));
     try {
       const data = await agent.Activities.list();
       let activities: Activity[] = [];
@@ -15,10 +15,10 @@ export const fetchActivities = () => {
         activities.push(activity);
       });
       dispatch(activityActions.setActivities(activities));
-      dispatch(activityActions.changeLoading(false))
+      dispatch(activityActions.changeLoading(false));
     } catch (error) {
       console.log(error);
-      dispatch(activityActions.changeLoading(false))
+      dispatch(activityActions.changeLoading(false));
     }
   };
 };
@@ -29,6 +29,7 @@ export const loadActivity = (id: string, activities?: Activity[]) => {
     if (activity) {
       //this case handles situation when we have our activity in memory
       dispatch(activityActions.setSelectedActivity(activity));
+      return activity;
     } else {
       dispatch(activityActions.changeLoading(true));
       try {
@@ -36,6 +37,7 @@ export const loadActivity = (id: string, activities?: Activity[]) => {
         activity = await agent.Activities.details(id);
         dispatch(activityActions.setSelectedActivity(activity));
         dispatch(activityActions.changeLoading(false));
+        return activity;
       } catch (error) {
         console.log(error);
         dispatch(activityActions.changeLoading(false));
