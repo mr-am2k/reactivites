@@ -1,7 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useSelector } from 'react-redux';
 import {
-  closeForm,
   createOrEditActivity,
 } from '../../../store/actions/activity-actions';
 import { useAppDispatch, RootState } from '../../../store/store';
@@ -96,9 +95,6 @@ const ActivityForm = () => {
 
         <button
           className={classes.cancelButton}
-          onClick={() => {
-            dispatch(closeForm());
-          }}
         >
           Cancel
         </button>

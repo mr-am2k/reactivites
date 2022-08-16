@@ -32,12 +32,6 @@ const activitySlice = createSlice({
     ) {
       state.selectedActivity = action.payload;
     },
-    cancelSelectedActivity(state: ActivityStore) {
-      state.selectedActivity = undefined;
-    },
-    changeEditMode(state: ActivityStore, action: PayloadAction<boolean>) {
-      state.editMode = action.payload;
-    },
     changeLoading(state: ActivityStore, action: PayloadAction<boolean>) {
       state.loading = action.payload;
     },

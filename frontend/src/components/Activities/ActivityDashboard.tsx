@@ -5,16 +5,10 @@ import { activityActions } from '../../store/slices/activity-slice';
 import { RootState, useAppDispatch } from '../../store/store';
 import Loading from '../../UI/Loading';
 import classes from './ActivityDashboard.module.css';
-import ActivityDetail from './ActivityDetails/ActivityDetail';
-import ActivityForm from './ActivityForm/ActivityForm';
 import ActivityList from './ActivityList/ActivityList';
 
 const ActivityDashboard = () => {
   const dispatch = useAppDispatch();
-  const selectedActivity = useSelector(
-    (state: RootState) => state.activities.selectedActivity
-  );
-  const editMode = useSelector((state: RootState) => state.activities.editMode);
   const loading = useSelector((state: RootState) => state.activities.loading);
 
   const onPageLoad = useCallback(async () => {
@@ -34,8 +28,8 @@ const ActivityDashboard = () => {
         <ActivityList />
       </div>
       <div className={classes.activityContainer}>
-        {selectedActivity && !editMode && <ActivityDetail />}
-        {editMode && <ActivityForm />}
+        <h1>Activity filters</h1>
+
       </div>
     </div>
   );

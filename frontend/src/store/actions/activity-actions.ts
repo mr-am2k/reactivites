@@ -6,6 +6,7 @@ import { Activity } from '../../models/activity';
 
 export const fetchActivities = () => {
   return async (dispatch: AppDispatch) => {
+    dispatch(activityActions.changeLoading(true))
     try {
       const data = await agent.Activities.list();
       let activities: Activity[] = [];
@@ -14,31 +15,32 @@ export const fetchActivities = () => {
         activities.push(activity);
       });
       dispatch(activityActions.setActivities(activities));
+      dispatch(activityActions.changeLoading(false))
     } catch (error) {
       console.log(error);
+      dispatch(activityActions.changeLoading(false))
     }
   };
 };
 
-export const changeSelectedActivity = (id: string, activities: Activity[]) => {
-  return (dispatch: AppDispatch) => {
-    const selectedActivity = activities.find((activity) => activity.id === id);
-    dispatch(activityActions.setSelectedActivity(selectedActivity));
-  };
-};
-
-export const openForm = (id?: string, activities?: Activity[]) => {
-  return (dispatch: AppDispatch) => {
-    id
-      ? changeSelectedActivity(id, activities!)
-      : dispatch(activityActions.cancelSelectedActivity());
-    dispatch(activityActions.changeEditMode(true));
-  };
-};
-
-export const closeForm = () => {
-  return (dispatch: AppDispatch) => {
-    dispatch(activityActions.changeEditMode(false));
+export const loadActivity = (id: string, activities?: Activity[]) => {
+  return async (dispatch: AppDispatch) => {
+    let activity = activities?.find((activity) => activity.id === id);
+    if (activity) {
+      //this case handles situation when we have our activity in memory
+      dispatch(activityActions.setSelectedActivity(activity));
+    } else {
+      dispatch(activityActions.changeLoading(true));
+      try {
+        //this case handles situation when we need to fetch our activity from
+        activity = await agent.Activities.details(id);
+        dispatch(activityActions.setSelectedActivity(activity));
+        dispatch(activityActions.changeLoading(false));
+      } catch (error) {
+        console.log(error);
+        dispatch(activityActions.changeLoading(false));
+      }
+    }
   };
 };
 
@@ -61,7 +63,6 @@ export const createOrEditActivity = (
             activity,
           ])
         );
-        dispatch(activityActions.changeEditMode(false));
         dispatch(activityActions.setSelectedActivity(activity));
         dispatch(activityActions.changeSubmitting(false));
       } catch (error) {
@@ -73,7 +74,6 @@ export const createOrEditActivity = (
       try {
         await agent.Activities.create(activity);
         dispatch(activityActions.setActivities([...activities, activity]));
-        dispatch(activityActions.changeEditMode(false));
         dispatch(activityActions.setSelectedActivity(activity));
         dispatch(activityActions.changeSubmitting(false));
       } catch (error) {
@@ -92,7 +92,6 @@ export const deleteActivity = (
     try {
       dispatch(activityActions.changeDeleting(true));
       if (selectedActivity.id === id) {
-        dispatch(activityActions.cancelSelectedActivity());
       }
       await agent.Activities.delete(id);
       dispatch(
