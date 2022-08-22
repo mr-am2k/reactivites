@@ -15,6 +15,7 @@ export const fetchActivities = () => {
       });
       dispatch(activityActions.setActivities(activities));
       dispatch(activityActions.changeLoading(false));
+      dispatch(groupedActivitiesByDate(activities))
     } catch (error) {
       console.log(error);
       dispatch(activityActions.changeLoading(false));
@@ -51,7 +52,7 @@ export const createOrEditActivity = (
 ) => {
   return async (dispatch: AppDispatch) => {
     dispatch(activityActions.changeSubmitting(true));
-    const activityExist = activities.find(act => act.id === activity.id)
+    const activityExist = activities.find((act) => act.id === activity.id);
     if (activityExist) {
       //if id exists that means that we need to edit activity
       try {
@@ -103,5 +104,21 @@ export const deleteActivity = (
     } catch (error) {
       console.log(error);
     }
+  };
+};
+
+export const groupedActivitiesByDate = (activities: Activity[]) => {
+  //returning object that has array of activities group by date
+  return (dispatch: AppDispatch) => {
+    const newActivities = Object.entries(
+      activities.reduce((activities, activity) => {
+        const date = activity.date;
+        activities[date] = activities[date]
+          ? [...activities[date], activity]
+          : [activity];
+        return activities;
+      }, {} as { [key: string]: Activity[] })
+    );
+    dispatch(activityActions.setActivitiesGroupedByDate(newActivities))
   };
 };

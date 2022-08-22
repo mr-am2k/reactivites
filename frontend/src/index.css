@@ -12,6 +12,7 @@
   --button-hover-purple-gradient: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(224,12,238,1) 46%);
   --button-blue: #1e90ff;
   --color-white: #ffffff;
+  --color-teal: #319DA0;
 }
 body {
   margin: 0;

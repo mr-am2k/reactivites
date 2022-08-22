@@ -3,6 +3,7 @@ import { Activity } from '../../models/activity';
 
 type ActivityStore = {
   activities: Activity[];
+  activitiesGroupedByDate: [string,Activity[]][]
   selectedActivity: Activity | undefined;
   editMode: boolean;
   loading: boolean;
@@ -12,6 +13,7 @@ type ActivityStore = {
 
 const initialState: ActivityStore = {
   activities: [],
+  activitiesGroupedByDate: [],
   selectedActivity: undefined,
   editMode: false,
   loading: true,
@@ -25,6 +27,9 @@ const activitySlice = createSlice({
   reducers: {
     setActivities(state: ActivityStore, action: PayloadAction<Activity[]>) {
       state.activities = action.payload.sort((a,b) => Date.parse(b.date) - Date.parse(a.date)); //sorting activities in descending order
+    },
+    setActivitiesGroupedByDate(state: ActivityStore, action: PayloadAction<[string, Activity[]][]>) {
+      state.activitiesGroupedByDate = action.payload
     },
     setSelectedActivity(
       state: ActivityStore,

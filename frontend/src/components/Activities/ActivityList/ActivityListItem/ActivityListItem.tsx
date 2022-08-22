@@ -4,14 +4,17 @@ import { Link } from 'react-router-dom';
 import { Activity } from '../../../../models/activity';
 import { deleteActivity } from '../../../../store/actions/activity-actions';
 import { RootState, useAppDispatch } from '../../../../store/store';
+import { AiFillClockCircle } from 'react-icons/ai';
+import { HiLocationMarker } from 'react-icons/hi';
 import classes from './ActivityListItem.module.css';
+import user from '../../../../assets/user.png';
 
 type Props = {
-  children?: React.ReactNode,
-  activity: Activity
-}
+  children?: React.ReactNode;
+  activity: Activity;
+};
 
-const ActivityListItem: React.FC<Props> = ({activity}) => {
+const ActivityListItem: React.FC<Props> = ({ activity }) => {
   const dispatch = useAppDispatch();
   const activities = useSelector(
     (state: RootState) => state.activities.activities
@@ -29,55 +32,33 @@ const ActivityListItem: React.FC<Props> = ({activity}) => {
     dispatch(deleteActivity(id, selectedActivity!, activities));
   };
   return (
-    <div className={classes.activityContainer}>
-      <div className={classes.activityContent}>
-        <h3>{activity.title}</h3>
-        <p>{activity.date}</p>
-        <h5>{activity.description}</h5>
-        <h5 className={classes.descriptionContent}>{activity.city}, </h5>
-        <h5 className={classes.descriptionContent}>{activity.venue}</h5>
-        <p className={classes.activityCategory}>{activity.category}</p>
+    <div className={classes.activityItemContainer}>
+      <div className={classes.activityHeader}>
+        <img src={user} alt='user' />
+        <div className={classes.activityHeaderInfo}>
+          <h3>{activity.title}</h3>
+          <h4>Hosted by User</h4>
+        </div>
       </div>
-      <div className={classes.activityButton}>
+      <div className={classes.activityInfo}>
+        <div className={classes.activityInfoDate}>
+          <h3>{<AiFillClockCircle />}</h3>
+          <h3>{activity.date}</h3>
+        </div>
+        <div className={classes.activityInfoVenue}>
+          <h3>{<HiLocationMarker />}</h3>
+          <h3>{activity.venue}</h3>
+        </div>
+      </div>
+      <div className={classes.activityAttendees}>
+        <h5>Attendees go here</h5>
+      </div>
+      <div className={classes.activityDescription}>
+        <h4>{activity.description}</h4>
         <Link to={`/activities/${activity.id}`}>
-          <button className={classes.viewButton}>View</button>
+          <button>View</button>
         </Link>
-
-        {deleting && target === activity.id && (
-          <button
-            name={activity.id}
-            className={classes.deleteButton}
-            onClick={(event) => {
-              activityDeleteHandler(event, activity.id);
-            }}
-          >
-            Loading...
-          </button>
-        )}
-        {deleting && target !== activity.id && (
-          <button
-            name={activity.id}
-            className={classes.deleteButton}
-            onClick={(event) => {
-              activityDeleteHandler(event, activity.id);
-            }}
-          >
-            Delete Activity
-          </button>
-        )}
-        {!deleting && (
-          <button
-            name={activity.id}
-            className={classes.deleteButton}
-            onClick={(event) => {
-              activityDeleteHandler(event, activity.id);
-            }}
-          >
-            Delete Activity
-          </button>
-        )}
       </div>
-      <hr />
     </div>
   );
 };
