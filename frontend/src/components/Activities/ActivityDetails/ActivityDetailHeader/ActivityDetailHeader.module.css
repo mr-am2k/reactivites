@@ -1,0 +1,135 @@
+.activityDetailInfoContainer {
+  width: 100%;
+  background-color: var(--color-white);
+  font-family: var(--font-family);
+  border-radius: 5px;
+  box-shadow: 0px 5px 15px 5px gray;
+  margin-bottom: 3rem;
+}
+.imageContainer {
+  position: relative;
+}
+.activityImage img {
+  width: 100%;
+  height: 25rem;
+  overflow: hidden;
+}
+.overlay {
+  float: left;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  height: 25rem;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.activityContent {
+  position: absolute;
+  top: 55%;
+  left: 10%;
+  z-index: 2;
+  color: white;
+}
+.buttonsContainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 1rem;
+  padding-bottom: 1rem;
+}
+.buttonsContainer button {
+  width: 7rem;
+  height: 3rem;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  font-family: var(--font-family);
+  font-size: 1rem;
+}
+.buttonsContainer button:hover {
+  width: 7.1rem;
+  height: 3.1rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+.activityActionButtons {
+  padding-left: 2rem;
+  width: 50%;
+  display: flex;
+  justify-content: flex-start;
+}
+.joinButton {
+  margin-right: 2rem;
+  background-color: var(--color-teal);
+}
+.cancelButton {
+  background-color: gray;
+  color: var(--color-white);
+}
+.activityManageButton {
+  padding-right: 2rem;
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
+}
+.manageButton {
+  background-color: var(--color-orange);
+}
+@media screen and (max-width: 950px) {
+    .activityImage img {
+        height: 20rem;
+      }
+      .overlay {
+        height: 20rem;
+      }
+      .activityContent {
+        top: 40%;
+        left: 10%;
+      }
+  .buttonsContainer {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+  .activityActionButtons {
+    width: 100%;
+    padding-right: 1rem;
+  }
+  .activityManageButton {
+    width: 100%;
+    padding: 1rem 0 0 2rem;
+    justify-content: flex-start;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .activityImage img {
+    height: 15rem;
+  }
+  .overlay {
+    height: 15rem;
+  }
+  .activityContent {
+    top: 25%;
+    left: 10%;
+  }
+  .buttonsContainer {
+    justify-content: flex-start;
+  }
+  .buttonsContainer button {
+    width: 6rem;
+    font-size: 0.85rem;
+  }
+  .activityActionButtons {
+    padding-left: 1rem;
+    display: flex;
+    justify-content: flex-start;
+  }
+  .activityManageButton {
+    padding-left: 1rem;
+    justify-content: flex-start;
+  }
+  .joinButton {
+    margin-right: 1rem;
+  }
+}

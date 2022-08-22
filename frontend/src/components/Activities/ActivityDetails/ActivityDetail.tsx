@@ -5,6 +5,10 @@ import { Link, useParams } from 'react-router-dom';
 import classes from './ActivityDetails.module.css';
 import { useEffect } from 'react';
 import Loading from '../../../UI/Loading';
+import ActivityDetailInfo from './ActivityDetailInfo/ActivityDetailInfo';
+import ActivityDetailChat from './ActivityDetailChat/ActivityDetailChat';
+import ActivityDetailHeader from './ActivityDetailHeader/ActivityDetailHeader';
+import ActivityDetailSidebar from './ActivityDetailSidebar/ActivityDetailSidebar';
 
 const ActivityDetail = () => {
   const dispatch = useAppDispatch();
@@ -24,25 +28,14 @@ const ActivityDetail = () => {
   if (!activity) return <Loading content='Loading app...' />;
 
   return (
-    <div className={classes.activityContainer}>
-      <div className={classes.activityImage}>
-        <img
-          src='https://thetourguy.com/wp-content/uploads/2021/10/Most-Historic-Pubs-in-London-1440-x-675.jpg'
-          alt='text'
-        />
+    <div className={classes.activityDetailContainer}>
+      <div className={classes.activityDetailInfo}>
+        <ActivityDetailHeader activity={activity}/>
+        <ActivityDetailInfo />
+        <ActivityDetailChat />
       </div>
-      <div className={classes.activityContent}>
-        <h3>{activity?.title}</h3>
-        <p>{activity?.date}</p>
-        <p>{activity?.description}</p>
-      </div>
-      <div className={classes.activityButtons}>
-        <Link to={`/manage/${activity.id}`}>
-          <button className={classes.editButton}>Edit</button>
-        </Link>
-        <Link to='/activities'>
-          <button className={classes.cancelButton}>Cancel</button>
-        </Link>
+      <div className={classes.activityDetailSidebar}>
+        <ActivityDetailSidebar />
       </div>
     </div>
   );
