@@ -16,7 +16,7 @@ function App() {
         <Route
           path='/'
           element={
-            <div className={classes.appContainer}>
+            <div>
               <HomePage />
             </div>
           }
