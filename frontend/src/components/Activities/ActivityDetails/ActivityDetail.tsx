@@ -31,7 +31,7 @@ const ActivityDetail = () => {
     <div className={classes.activityDetailContainer}>
       <div className={classes.activityDetailInfo}>
         <ActivityDetailHeader activity={activity}/>
-        <ActivityDetailInfo />
+        <ActivityDetailInfo activity={activity}/>
         <ActivityDetailChat />
       </div>
       <div className={classes.activityDetailSidebar}>

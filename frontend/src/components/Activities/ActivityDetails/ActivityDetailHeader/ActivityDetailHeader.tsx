@@ -7,6 +7,8 @@ type Props = {
 };
 
 const ActivityDetailHeader: React.FC<Props> = ({ activity }) => {
+  let cutDescription=''
+  activity.description.length > 60 ? cutDescription =  `${activity.description.substring(0, 60)}...` : cutDescription = activity.description
   return (
     <div className={classes.activityDetailInfoContainer}>
       <div className={classes.imageContainer}>
@@ -20,7 +22,7 @@ const ActivityDetailHeader: React.FC<Props> = ({ activity }) => {
         <div className={classes.activityContent}>
           <h2>{activity?.title}</h2>
           <h4>{activity?.date}</h4>
-          <h4>{activity?.description}</h4>
+          <h4>{cutDescription}</h4>
         </div>
       </div>
       <div className={classes.buttonsContainer}>

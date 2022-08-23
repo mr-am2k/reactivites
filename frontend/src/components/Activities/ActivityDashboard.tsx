@@ -32,7 +32,7 @@ const ActivityDashboard = () => {
       <div className={classes.activityList}>
         <ActivityList />
       </div>
-      <div className={classes.activityContainer}>
+      <div className={classes.activityFilters}>
         <h1>Activity filters</h1>
       </div>
     </div>

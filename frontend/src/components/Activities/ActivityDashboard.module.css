@@ -1,10 +1,11 @@
 .dashboardContainer {
   display: flex;
+  width: 100%;
 }
 .activityList {
   width: 60%;
 }
-.activityContainer {
+.activityFilters {
   display: flex;
   align-items: center;
   flex-direction: column;

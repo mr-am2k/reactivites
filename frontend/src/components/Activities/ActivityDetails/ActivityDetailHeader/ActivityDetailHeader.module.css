@@ -3,8 +3,9 @@
   background-color: var(--color-white);
   font-family: var(--font-family);
   border-radius: 5px;
-  box-shadow: 0px 5px 15px 5px gray;
+  box-shadow: 0px 1px 10px 2px gray;
   margin-bottom: 3rem;
+  height: fit-content;
 }
 .imageContainer {
   position: relative;
@@ -12,6 +13,7 @@
 .activityImage img {
   width: 100%;
   height: 25rem;
+  border-radius: 5px 5px 0 0;
   overflow: hidden;
 }
 .overlay {
@@ -26,7 +28,7 @@
 }
 .activityContent {
   position: absolute;
-  top: 55%;
+  top: 45%;
   left: 10%;
   z-index: 2;
   color: white;
@@ -46,6 +48,7 @@
   border-radius: 5px;
   font-family: var(--font-family);
   font-size: 1rem;
+  font-weight: 500;
 }
 .buttonsContainer button:hover {
   width: 7.1rem;
@@ -77,16 +80,16 @@
   background-color: var(--color-orange);
 }
 @media screen and (max-width: 950px) {
-    .activityImage img {
-        height: 20rem;
-      }
-      .overlay {
-        height: 20rem;
-      }
-      .activityContent {
-        top: 40%;
-        left: 10%;
-      }
+  .activityImage img {
+    height: 20rem;
+  }
+  .overlay {
+    height: 20rem;
+  }
+  .activityContent {
+    top: 40%;
+    left: 10%;
+  }
   .buttonsContainer {
     flex-wrap: wrap;
     justify-content: flex-start;
@@ -110,8 +113,9 @@
     height: 15rem;
   }
   .activityContent {
-    top: 25%;
+    top: 0%;
     left: 10%;
+    height: fit-content;
   }
   .buttonsContainer {
     justify-content: flex-start;
@@ -122,14 +126,13 @@
   }
   .activityActionButtons {
     padding-left: 1rem;
-    display: flex;
-    justify-content: flex-start;
+    flex-direction: column;
   }
   .activityManageButton {
     padding-left: 1rem;
     justify-content: flex-start;
   }
   .joinButton {
-    margin-right: 1rem;
+    margin-bottom: 1rem;
   }
 }

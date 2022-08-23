@@ -47,10 +47,13 @@
 }
 .activityDescription {
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   margin: 0 2rem;
+}
+.activityDescription h4{
+  width: 70%;
+  text-align: justify;
 }
 .activityDescription button {
   width: 7rem;
@@ -68,9 +71,13 @@
     cursor: pointer;
     font-size: 1.6rem;
   }
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 950px) {
   .activityDescription {
     padding-bottom: 1rem;
+    flex-direction: column;
+  }
+  .activityDescription h4{
+    width: 100%;
   }
 }
 @media screen and (max-width: 550px) {
