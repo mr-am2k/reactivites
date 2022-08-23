@@ -20,10 +20,11 @@
     width: 100%;
   }
   .activityList {
-    width: 80%;
+    width: 100%;
     margin-top: 5rem;
   }
-  .activityContainer {
-    width: 80%;
+  .activityFilters {
+    width: 100%;
+    margin-left: 0;
   }
 }

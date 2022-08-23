@@ -1,0 +1,35 @@
+.activityFiltersContainer {
+  width: 100%;
+  margin-top: 3.6rem;
+  font-family: var(--font-family);
+}
+.activityFilters {
+  background-color: var(--color-white);
+  border-bottom: 1px solid gray;
+  box-shadow: var(--box-shadow);
+  margin-bottom: 2rem;
+}
+.header {
+  color: var(--color-teal);
+  min-height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 1rem;
+}
+.header h3 {
+  margin: 0;
+}
+.filter {
+  min-height: 3rem;
+  padding: 0.5rem 0 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border-bottom: 1px solid gray;
+}
+.filter h3 {
+  margin: 0;
+}
+.activityFiltersCalendar {
+}

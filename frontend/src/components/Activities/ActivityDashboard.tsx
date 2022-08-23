@@ -5,6 +5,7 @@ import { activityActions } from '../../store/slices/activity-slice';
 import { RootState, useAppDispatch } from '../../store/store';
 import Loading from '../../UI/Loading';
 import classes from './ActivityDashboard.module.css';
+import ActivityFilters from './ActivityFilters/ActivityFilters';
 import ActivityList from './ActivityList/ActivityList';
 
 const ActivityDashboard = () => {
@@ -33,7 +34,7 @@ const ActivityDashboard = () => {
         <ActivityList />
       </div>
       <div className={classes.activityFilters}>
-        <h1>Activity filters</h1>
+        <ActivityFilters/>
       </div>
     </div>
   );
