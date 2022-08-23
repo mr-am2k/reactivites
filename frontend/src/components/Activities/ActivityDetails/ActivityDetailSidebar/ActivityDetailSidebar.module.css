@@ -1,0 +1,62 @@
+.activityDetailSidebarContainer {
+  background-color: var(--color-white);
+  width: 100%;
+  border-radius: 5px;
+  box-shadow: var(--box-shadow);
+  font-family: var(--font-family);
+}
+.activityDetailSidebarHeader {
+  min-height: 3rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-teal);
+  color: var(--color-white);
+}
+.activityDetailSidebarAttendees {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+.attendee {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid gray;
+}
+.attendee img {
+  width: 5rem;
+  height: 5rem;
+  margin-left: 1rem;
+}
+.attendeeInfo {
+  margin-left: 1rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.attendeeInfo h2 {
+  margin: 0.3rem 0;
+}
+.attendeeInfo h5 {
+  margin: 0.3rem 0;
+  color: orange;
+}
+.attendeeInfo span {
+  display: block;
+  width: 5rem;
+  height: 2rem;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: orange;
+  font-weight: 500;
+  border-radius: 5px;
+}
+@media screen and (max-width:950px) {
+    .activityDetailSidebarContainer{
+        margin-top: 2rem;
+    }
+}
