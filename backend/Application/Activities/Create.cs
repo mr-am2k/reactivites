@@ -1,5 +1,6 @@
 
 using Domain;
+using FluentValidation;
 using MediatR;
 using Persistence;
 
@@ -10,6 +11,14 @@ namespace Application.Activities
         public class Command : IRequest //Command doesn't return data
         {
             public Activity Activity { get; set; } //this is what we want to receive as a parameter
+        }
+
+        public class CommandValidatior : AbstractValidator<Command> //creating class for validation that build on abstractValidatior that ispart of fluentValidation 
+        {
+            public CommandValidatior()
+            {
+                RuleFor(x => x.Activity).SetValidator(new ActivityValidator()); //set rule for activity where we are setting validator on our ActivityValdiator which makes sure that none of oure fields is empty
+            }
         }
 
 

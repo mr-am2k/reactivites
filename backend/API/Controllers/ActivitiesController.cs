@@ -3,10 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Application.Activities;
 
 namespace API.Controllers;
-
-[ApiController]
-[Route("api/[controller]")]
-
 public class ActivitiesController : BaseApiController
 {
 

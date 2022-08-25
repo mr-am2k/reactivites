@@ -1,11 +1,17 @@
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 using API.Extensions;
+using FluentValidation.AspNetCore;
+using Application.Activities;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllers();
+#pragma warning disable CS0618 // Type or member is obsolete
+builder.Services.AddControllers().AddFluentValidation(options =>
+{
+    options.RegisterValidatorsFromAssemblyContaining<Create>();
+});
 builder.Services.AddApplicationServices(builder.Configuration);
 var app = builder.Build();
 
@@ -26,7 +32,7 @@ var app = builder.Build();
     }
 }
 
-// Configure the HTTP request pipeline.
+//Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
