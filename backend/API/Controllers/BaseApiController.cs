@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
+using Application.Core;
 
 namespace API.Controllers
 {
@@ -13,5 +14,13 @@ namespace API.Controllers
 
         protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
         //??= means that if _mediator is null, we will assign anything that is after = sign to the Mediator
+    
+        protected ActionResult HandleResult<T>(Result<T> result)
+        {
+            if (result.IsSuccess && result.Value != null) return Ok(result.Value);
+            if (result.IsSuccess && result.Value == null) return NotFound();
+            return BadRequest();
+        }
     }
+
 }
