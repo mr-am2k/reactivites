@@ -3,6 +3,7 @@ using Persistence;
 using API.Extensions;
 using FluentValidation.AspNetCore;
 using Application.Activities;
+using API.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,13 +34,16 @@ var app = builder.Build();
 }
 
 //Configure the HTTP request pipeline.
+//Using middleware we created to create response we want during testing 
+app.UseMiddleware<ExceptionMiddleware>();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseCors("CorsPolicy");
 

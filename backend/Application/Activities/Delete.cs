@@ -22,7 +22,7 @@ namespace Application.Activities
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
                 var activityForDelete = await _context.Activities.FindAsync(request.Id);
-                if (activityForDelete == null) return null;
+                //if (activityForDelete == null) return null;
                 _context.Remove(activityForDelete);
                 var result = await _context.SaveChangesAsync() > 0;
                 if (!result) return Result<Unit>.Failure("Failed to delete activity!");
