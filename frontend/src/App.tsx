@@ -5,7 +5,9 @@ import {
   HomePage,
   ActivityForm,
   ActivityDetail,
-  TestError
+  TestError,
+  NotFound,
+  ServerError
 } from './components/index';
 import classes from './App.module.css';
 import { Route, Routes } from 'react-router-dom';
@@ -36,6 +38,8 @@ function App() {
                   <Route path='/createactivity' element={<ActivityForm />} />
                   <Route path='/manage/:id' element={<ActivityForm />} />
                   <Route path='/errors' element={<TestError/>}/>
+                  <Route path='/server-error' element={<ServerError/>}/>
+                  <Route path='/*' element={<NotFound/>} /> {/*If our route doesn't match any of the above, it will display NotFound component */}
                 </Routes>
               </div>
             </>

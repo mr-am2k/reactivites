@@ -2,17 +2,20 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import store from './store/store';
 import 'react-calendar/dist/Calendar.css'
-import 'react-toastify/dist/ReactToastify.min.css'
+import 'react-toastify/dist/ReactToastify.css';
 import App from './App';
 import './index.css';
 import { BrowserRouter } from 'react-router-dom';
+import {createBrowserHistory} from 'history'
+
+export const history = createBrowserHistory()
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <Provider store={store}>
-    <BrowserRouter>
+    <BrowserRouter >
       <App />
     </BrowserRouter>
   </Provider>

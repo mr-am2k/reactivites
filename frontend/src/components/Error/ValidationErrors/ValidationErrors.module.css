@@ -1,0 +1,14 @@
+.validationErrorContainer{
+width: 100%;
+background-color: var(--color-white);
+display: flex;
+align-items: flex-start;
+justify-content: center;
+flex-direction: column;
+font-family: var(--font-family);
+padding: 3rem 0;
+box-shadow: var(--box-shadow);
+border-radius: 5px;
+margin-top: 2rem;
+color: #EC7272;
+}

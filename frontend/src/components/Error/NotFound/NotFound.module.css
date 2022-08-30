@@ -1,0 +1,39 @@
+.notFoundContainer{
+    width: 100%;
+    background-color: var(--color-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-family: var(--font-family);
+    padding: 3rem 0;
+    box-shadow: var(--box-shadow);
+    border-radius: 5px;
+}
+.notFoundIcon {
+    font-size: 5rem;
+}
+.notFoundContainer button{
+    width: 15rem;
+    height: 3rem;
+    outline: none;
+    outline: none;
+    border: 1px solid var(--color-gray);
+    background-color: var(--color-blue);
+    border-radius: 5px;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    font-family: var(--font-family);
+    color: var(--color-white);
+}
+.notFoundContainer button:hover{
+    width: 15.1rem;
+    height: 3.1rem;
+    cursor: pointer;
+}
+@media screen and (max-width: 550px) {
+    .notFoundContainer button{
+        width: 10rem;
+    }
+}

@@ -42,6 +42,7 @@ const Navbar = () => {
               <NavLink to='/activities' onClick={closeMenu}>
                 Activities
               </NavLink>
+              <NavLink to='/errors'>Errors</NavLink>
               <NavLink to='/createActivity'>
                 <button
                   onClick={closeMenu}

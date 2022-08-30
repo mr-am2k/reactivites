@@ -1,0 +1,13 @@
+.serverErrorContainer{
+    width: 100%;
+    font-family: var(--font-family);
+}
+.serverErrorContainer h3{
+    color: red;
+}
+.serverErrorContent{
+    background-color: var(--color-white);
+    border-radius: 5px;
+    box-shadow: var(--box-shadow);
+    padding: 1rem ;
+}
