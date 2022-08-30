@@ -5,13 +5,16 @@ import {
   HomePage,
   ActivityForm,
   ActivityDetail,
+  TestError
 } from './components/index';
 import classes from './App.module.css';
 import { Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (
     <Fragment>
+      <ToastContainer position='bottom-right' hideProgressBar/>
       <Routes>
         <Route
           path='/'
@@ -32,6 +35,7 @@ function App() {
                   <Route path='/activities/:id' element={<ActivityDetail />} />
                   <Route path='/createactivity' element={<ActivityForm />} />
                   <Route path='/manage/:id' element={<ActivityForm />} />
+                  <Route path='/errors' element={<TestError/>}/>
                 </Routes>
               </div>
             </>

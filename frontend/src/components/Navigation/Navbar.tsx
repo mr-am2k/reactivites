@@ -4,7 +4,7 @@ import GroupsIcon from '@mui/icons-material/Groups';
 import classes from './Navbar.module.css';
 
 const Navbar = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [mobileLinks, setMobileLinks] = useState(false);
   const menuHandler = () => {
     setMobileLinks((prevState) => {
@@ -21,9 +21,14 @@ const Navbar = () => {
         <div className={classes.navbarDesktopLinks}>
           <NavLink to='/'>Reactivities</NavLink>
           <NavLink to='/activities'>Activities</NavLink>
-
-            <button onClick={() => {navigate('/createactivity')}}>Create Activity</button>
-
+          <NavLink to='/errors'>Errors</NavLink>
+          <button
+            onClick={() => {
+              navigate('/createactivity');
+            }}
+          >
+            Create Activity
+          </button>
         </div>
         <div className={classes.navbarMobileContainer}>
           <button className={classes.menuButton} onClick={menuHandler}>
@@ -38,7 +43,12 @@ const Navbar = () => {
                 Activities
               </NavLink>
               <NavLink to='/createActivity'>
-                <button onClick={closeMenu} className={classes.activityMobileButton}>Create Activity</button>
+                <button
+                  onClick={closeMenu}
+                  className={classes.activityMobileButton}
+                >
+                  Create Activity
+                </button>
               </NavLink>
             </div>
           )}

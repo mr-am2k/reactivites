@@ -1,0 +1,32 @@
+.testErrorContainer{
+    font-family: var(--font-family);
+    width: 100%;
+}
+.testErrorButtons{
+    background-color: white;
+    box-shadow: var(--box-shadow);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    height: fit-content;
+    padding: 1rem 0 0.5rem;
+}
+.testErrorButtons button{
+    width: 17rem;
+    height: 3rem;
+    outline: none;
+    border: 1px solid var(--color-blue);
+    background-color: transparent;
+    border-radius: 5px;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+.testErrorButtons button:hover{
+    width: 17.1rem;
+    height: 3.1rem;
+    border: none;
+    background-color: var(--color-blue);
+    color: var(--color-white);
+    cursor: pointer;
+}
