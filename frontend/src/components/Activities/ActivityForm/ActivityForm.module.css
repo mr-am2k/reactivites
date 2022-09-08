@@ -8,21 +8,6 @@
   border-radius: 5px;
   box-shadow: 2px 2px 25px #888888;
 }
-.activityForm input{
-  margin-top: 0.5rem;
-  width: 80%;
-  height: 2rem;
-  outline: none;
-  border: 1px solid gray;
-  padding-left: 1rem;
-  margin: 1rem 4rem 0;
-  font-size: 1rem;
-  font-family: var(--font-family);
-  border-radius: 5px;
-}
-.activityForm input:focus {
-  border: 2px solid var(--color-blue);
-}
 
 .activityFormButtons{
     width: 100%;

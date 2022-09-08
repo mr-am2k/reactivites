@@ -12,6 +12,8 @@ import { activityActions } from '../../../store/slices/activity-slice';
 import { v4 as uuid } from 'uuid';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import MyTextInput from '../../UI/Form/MyTextInput';
+import MyTextArea from '../../UI/Form/MyTextArea';
 
 const ActivityForm = () => {
   const dispatch = useAppDispatch();
@@ -37,6 +39,11 @@ const ActivityForm = () => {
 
   const validationSchema = Yup.object({
     title: Yup.string().required('The activity title is required'),
+    description: Yup.string().required('The activity description is required'),
+    category: Yup.string().required('The activity category is required'),
+    date: Yup.string().required('The activity date is required'),
+    venue: Yup.string().required('The activity venue is required'),
+    city: Yup.string().required('The activity city is required'),
   });
 
   // const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
@@ -88,14 +95,13 @@ const ActivityForm = () => {
             onSubmit={handleSubmit}
             autoComplete='off'
           >
-            
-            <Field placeholder='Title' name='title' />
-            <ErrorMessage name ='title' render={error => <p>{error}</p>}/>
-            <Field placeholder='Description' name='description' />
-            <Field placeholder='Category' name='category' />
-            <Field type='date' placeholder='Date' name='date' />
-            <Field placeholder='City' name='city' />
-            <Field placeholder='Venue' name='venue' />
+            <MyTextInput name='title' placeholder='Title' />
+            <MyTextArea rows={3} name='description' placeholder='Description' />
+            <MyTextInput name='category' placeholder='Category' />
+            <MyTextInput name='date' placeholder='Date' />
+            <MyTextInput name='city' placeholder='City' />
+            <MyTextInput name='venue' placeholder='Venue' />
+
             <div className={classes.activityFormButtons}>
               {submitting && (
                 <button className={classes.submitButtonLoading} type='submit'>
