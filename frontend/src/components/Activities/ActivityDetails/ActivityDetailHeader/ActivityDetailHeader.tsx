@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Activity } from '../../../../models/activity';
 import classes from './ActivityDetailHeader.module.css';
 
@@ -7,8 +8,10 @@ type Props = {
 };
 
 const ActivityDetailHeader: React.FC<Props> = ({ activity }) => {
-  let cutDescription=''
-  activity.description.length > 60 ? cutDescription =  `${activity.description.substring(0, 60)}...` : cutDescription = activity.description
+  let cutDescription = '';
+  activity.description.length > 60
+    ? (cutDescription = `${activity.description.substring(0, 60)}...`)
+    : (cutDescription = activity.description);
   return (
     <div className={classes.activityDetailInfoContainer}>
       <div className={classes.imageContainer}>
@@ -31,7 +34,9 @@ const ActivityDetailHeader: React.FC<Props> = ({ activity }) => {
           <button className={classes.cancelButton}>Cancel attendance</button>
         </div>
         <div className={classes.activityManageButton}>
-          <button className={classes.manageButton}>Mange Event</button>
+          <Link to={`/manage/${activity.id}`}>
+            <button className={classes.manageButton}>Mange Event</button>
+          </Link>
         </div>
       </div>
     </div>

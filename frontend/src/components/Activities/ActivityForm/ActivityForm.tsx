@@ -10,6 +10,8 @@ import classes from './ActivityForm.module.css';
 import Loading from '../../../UI/Loading';
 import { activityActions } from '../../../store/slices/activity-slice';
 import { v4 as uuid } from 'uuid';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 
 const ActivityForm = () => {
   const dispatch = useAppDispatch();
@@ -33,24 +35,28 @@ const ActivityForm = () => {
   };
   const [activity, setActivity] = useState(initialState);
 
-  const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    //if activity object has id that is empty string, that means that we are creating new activity and that we need to create id for it
-    if (activity.id.length === 0) {
-      const newActivity = { ...activity, id: uuid() };
-      await dispatch(createOrEditActivity(newActivity, activities));
-      navigate(`/activities/${newActivity.id}`);
-    } else {
-      await dispatch(createOrEditActivity(activity, activities));
-      navigate(`/activities/${activity.id}`);
-    }
-  };
-  const inputChangeHandler = (
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = event.target;
-    setActivity({ ...activity, [name]: value });
-  };
+  const validationSchema = Yup.object({
+    title: Yup.string().required('The activity title is required'),
+  });
+
+  // const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
+  //   event.preventDefault();
+  //   //if activity object has id that is empty string, that means that we are creating new activity and that we need to create id for it
+  //   if (activity.id.length === 0) {
+  //     const newActivity = { ...activity, id: uuid() };
+  //     await dispatch(createOrEditActivity(newActivity, activities));
+  //     navigate(`/activities/${newActivity.id}`);
+  //   } else {
+  //     await dispatch(createOrEditActivity(activity, activities));
+  //     navigate(`/activities/${activity.id}`);
+  //   }
+  // };
+  // const handleChange = (
+  //   event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  // ) => {
+  //   const { name, value } = event.target;
+  //   setActivity({ ...activity, [name]: value });
+  // };
 
   useEffect(() => {
     if (id) {
@@ -69,64 +75,46 @@ const ActivityForm = () => {
   if (loading) return <Loading />;
 
   return (
-    <form
-      className={classes.activityForm}
-      onSubmit={submitHandler}
-      autoComplete='off'
-    >
-      <input
-        placeholder='Title'
-        value={activity.title}
-        name='title'
-        onChange={inputChangeHandler}
-      />
-      <textarea
-        placeholder='Description'
-        value={activity.description}
-        name='description'
-        onChange={inputChangeHandler}
-      />
-      <input
-        placeholder='Category'
-        value={activity.category}
-        name='category'
-        onChange={inputChangeHandler}
-      />
-      <input
-        type='date'
-        placeholder='Date'
-        value={activity.date}
-        name='date'
-        onChange={inputChangeHandler}
-      />
-      <input
-        placeholder='City'
-        value={activity.city}
-        name='city'
-        onChange={inputChangeHandler}
-      />
-      <input
-        placeholder='Venue'
-        value={activity.venue}
-        name='venue'
-        onChange={inputChangeHandler}
-      />
-      <div className={classes.activityFormButtons}>
-        {submitting && (
-          <button className={classes.submitButtonLoading} type='submit'>
-            Loading...
-          </button>
+    <>
+      <Formik
+        validationSchema={validationSchema}
+        enableReinitialize
+        initialValues={activity}
+        onSubmit={(values) => console.log(values)}
+      >
+        {({ handleSubmit }) => (
+          <Form
+            className={classes.activityForm}
+            onSubmit={handleSubmit}
+            autoComplete='off'
+          >
+            
+            <Field placeholder='Title' name='title' />
+            <ErrorMessage name ='title' render={error => <p>{error}</p>}/>
+            <Field placeholder='Description' name='description' />
+            <Field placeholder='Category' name='category' />
+            <Field type='date' placeholder='Date' name='date' />
+            <Field placeholder='City' name='city' />
+            <Field placeholder='Venue' name='venue' />
+            <div className={classes.activityFormButtons}>
+              {submitting && (
+                <button className={classes.submitButtonLoading} type='submit'>
+                  Loading...
+                </button>
+              )}
+              {!submitting && (
+                <button className={classes.submitButton} type='submit'>
+                  Submit
+                </button>
+              )}
+              <Link to={'/activities/'}>
+                <button className={classes.cancelButton}>Cancel</button>
+              </Link>
+            </div>
+          </Form>
         )}
-        {!submitting && (
-          <button className={classes.submitButton} type='submit'>
-            Submit
-          </button>
-        )}
-        <Link to={'/activities/'}>
-          <button className={classes.cancelButton}>Cancel</button>
-        </Link>
-      </div>
-    </form>
+      </Formik>
+    </>
   );
 };
 

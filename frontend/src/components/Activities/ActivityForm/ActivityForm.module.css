@@ -8,8 +8,7 @@
   border-radius: 5px;
   box-shadow: 2px 2px 25px #888888;
 }
-.activityForm input,
-.activityForm textarea {
+.activityForm input{
   margin-top: 0.5rem;
   width: 80%;
   height: 2rem;
@@ -21,14 +20,10 @@
   font-family: var(--font-family);
   border-radius: 5px;
 }
-.activityForm input:focus,
-.activityForm textarea:focus {
-  border: 2px solid var(--button-blue);
+.activityForm input:focus {
+  border: 2px solid var(--color-blue);
 }
 
-.activityForm textarea {
-  height: 4rem;
-}
 .activityFormButtons{
     width: 100%;
     margin: 2rem 2rem 2rem 0;
