@@ -24,25 +24,12 @@
 .inputField input:focus {
   border: 2px solid var(--color-blue);
 }
-.error{
-    background-color: rgba(249, 72, 146, 0.5)
+.error {
+  background-color: rgba(249, 72, 146, 0.5);
 }
-.labelError{
-    background-color: rgba(249, 72, 146, 0.5);
-    padding: 0.2rem;
-    border-radius: 5px;
-    font-family: var(--font-family);
-}
-
-@media screen and (max-width: 1300px) {
-  .inputField input,
-  .inputField label {
-    width: fit-content;
-  }
-}
-@media screen and (max-width: 900px) {
-  .inputField input,
-  .inputField label {
-    width: fit-content;
-  }
+.labelError {
+  background-color: rgba(249, 72, 146, 0.5);
+  padding: 0.2rem;
+  border-radius: 5px;
+  font-family: var(--font-family);
 }
