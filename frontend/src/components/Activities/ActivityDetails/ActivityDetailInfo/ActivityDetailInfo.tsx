@@ -2,6 +2,7 @@ import { Activity } from '../../../../models/activity';
 import classes from './ActivityDetailInfo.module.css';
 import { FaInfo, FaCalendar } from 'react-icons/fa';
 import { MdLocationOn } from 'react-icons/md';
+import {format} from 'date-fns'
 type Props = {
   children?: React.ReactNode;
   activity: Activity;
@@ -21,7 +22,7 @@ const ActivityDetailInfo: React.FC<Props> = ({ activity }) => {
         <h3>
           <FaCalendar className={classes.icon} />
         </h3>
-        <h3>{activity.date}</h3>
+        <h3>{format(activity.date!, 'dd MMM yyyy h:mm aa')}</h3>
       </div>
       <div className={classes.activityDetailInfoLocation}>
         <h3>

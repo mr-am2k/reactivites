@@ -8,7 +8,12 @@
   border-radius: 5px;
   box-shadow: 2px 2px 25px #888888;
 }
-
+.activityForm h3{
+  width: 80%;
+  font-family: var(--font-family);
+  color: teal;
+  text-align: left;
+}
 .activityFormButtons{
     width: 100%;
     margin: 2rem 2rem 2rem 0;

@@ -2,6 +2,7 @@ import { activityActions } from '../slices/activity-slice';
 import { AppDispatch } from '../store';
 import agent from '../../api/agent';
 import { Activity } from '../../models/activity';
+import {format} from 'date-fns'
 
 export const fetchActivities = () => {
   return async (dispatch: AppDispatch) => {
@@ -10,7 +11,7 @@ export const fetchActivities = () => {
       const data = await agent.Activities.list();
       let activities: Activity[] = [];
       data.forEach((activity: Activity) => {
-        activity.date = activity.date.split('T')[0];
+        activity.date = new Date(activity.date!)
         activities.push(activity);
       });
       dispatch(activityActions.setActivities(activities));
@@ -112,7 +113,7 @@ export const groupedActivitiesByDate = (activities: Activity[]) => {
   return (dispatch: AppDispatch) => {
     const newActivities = Object.entries(
       activities.reduce((activities, activity) => {
-        const date = activity.date;
+        const date = activity.date!.toISOString().split('T')[0];
         activities[date] = activities[date]
           ? [...activities[date], activity]
           : [activity];

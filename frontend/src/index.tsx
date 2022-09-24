@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import store from './store/store';
 import 'react-calendar/dist/Calendar.css'
 import 'react-toastify/dist/ReactToastify.css';
+import 'react-datepicker/dist/react-datepicker.css'
 import App from './App';
 import './index.css';
 import { BrowserRouter } from 'react-router-dom';

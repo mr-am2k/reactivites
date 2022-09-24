@@ -8,6 +8,7 @@ import { AiFillClockCircle } from 'react-icons/ai';
 import { HiLocationMarker } from 'react-icons/hi';
 import classes from './ActivityListItem.module.css';
 import user from '../../../../assets/user.png';
+import { format } from 'date-fns';
 
 type Props = {
   children?: React.ReactNode;
@@ -43,7 +44,7 @@ const ActivityListItem: React.FC<Props> = ({ activity }) => {
       <div className={classes.activityInfo}>
         <div className={classes.activityInfoDate}>
           <h3>{<AiFillClockCircle />}</h3>
-          <h3>{activity.date}</h3>
+          <h3>{format(activity.date!, 'dd MMM yyyy h:mm aa') }</h3>
         </div>
         <div className={classes.activityInfoVenue}>
           <h3>{<HiLocationMarker />}</h3>

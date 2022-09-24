@@ -1,3 +1,4 @@
+import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
 import { Activity } from '../../../../models/activity';
 import classes from './ActivityDetailHeader.module.css';
@@ -24,7 +25,7 @@ const ActivityDetailHeader: React.FC<Props> = ({ activity }) => {
         <div className={classes.overlay}></div>
         <div className={classes.activityContent}>
           <h2>{activity?.title}</h2>
-          <h4>{activity?.date}</h4>
+          <h4>{format(activity?.date!, 'dd MMM yyyy')}</h4>
           <h4>{cutDescription}</h4>
         </div>
       </div>
