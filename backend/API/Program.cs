@@ -14,6 +14,7 @@ builder.Services.AddControllers().AddFluentValidation(options =>
     options.RegisterValidatorsFromAssemblyContaining<Create>();
 });
 builder.Services.AddApplicationServices(builder.Configuration);
+builder.Services.AddIdentityServices(builder.Configuration);
 var app = builder.Build();
 
 //Next scope is used to create or update database based on migration, this can be done in terminal (dotnet ef database update command)
