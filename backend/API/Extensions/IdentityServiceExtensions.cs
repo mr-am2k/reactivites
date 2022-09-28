@@ -10,7 +10,7 @@ namespace API.Extensions
         {
             services.AddIdentityCore<AppUser>(options =>
             {
-                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireNonAlphanumeric = false; //since idnetity requires letters, numbers and symbols for password, with this we are making symbols not required
             }).AddEntityFrameworkStores<DataContext>()
             .AddSignInManager<SignInManager<AppUser>>();
 

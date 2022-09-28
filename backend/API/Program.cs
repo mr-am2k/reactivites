@@ -4,6 +4,8 @@ using API.Extensions;
 using FluentValidation.AspNetCore;
 using Application.Activities;
 using API.Middleware;
+using Microsoft.AspNetCore.Identity;
+using Domain;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,8 +26,9 @@ var app = builder.Build();
     try
     {
         var context = services.GetRequiredService<DataContext>();
+        var userManager = services.GetRequiredService<UserManager<AppUser>>();
         await context.Database.MigrateAsync();
-        await Seed.SeedData(context);
+        await Seed.SeedData(context, userManager);
     }
     catch (Exception ex)
     {

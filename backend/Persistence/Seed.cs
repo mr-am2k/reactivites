@@ -1,11 +1,28 @@
 //Class used to create some starting data for Activities entity
 using Domain;
+using Microsoft.AspNetCore.Identity;
+
 namespace Persistence
 {
     public class Seed
     {
-        public static async Task SeedData(DataContext context)
+        public static async Task SeedData(DataContext context, UserManager<AppUser> userManager)
         {
+            if (!userManager.Users.Any()) //if there is no users, we will create some test users
+            {
+                var users = new List<AppUser>() //creating test users
+                {
+                    new AppUser { DisplayName = "Bob", UserName = "bob", Email = "bob@test.com"},
+                    new AppUser { DisplayName = "Tom", UserName = "tom", Email = "tom@test.com" },
+                    new AppUser { DisplayName = "Muamer", UserName = "muamer", Email = "muamer@test.com" }
+                };
+
+                foreach (var user in users)
+                {
+                    await userManager.CreateAsync(user, "Password1"); //adding all users, with default password for testing
+                }
+            }
+
             if (context.Activities.Any()) return;
 
             var activities = new List<Activity>
