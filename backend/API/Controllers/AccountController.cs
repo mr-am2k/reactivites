@@ -1,12 +1,13 @@
 ﻿using API.DTOs;
 using API.Serevices;
 using Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-
+    [AllowAnonymous] //makes sure that we can acces all endpoints in this controller without authorization
     [ApiController]
     [Route("api/[controller]")]
 

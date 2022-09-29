@@ -6,12 +6,19 @@ using Application.Activities;
 using API.Middleware;
 using Microsoft.AspNetCore.Identity;
 using Domain;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 #pragma warning disable CS0618 // Type or member is obsolete
-builder.Services.AddControllers().AddFluentValidation(options =>
+builder.Services.AddControllers(options =>
+{
+    var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+    options.Filters.Add(new AuthorizeFilter(policy)); //those 2 lines make sure that every single endpoint requires authorization
+})
+    .AddFluentValidation(options =>
 {
     options.RegisterValidatorsFromAssemblyContaining<Create>();
 });
